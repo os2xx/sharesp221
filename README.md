@@ -14,10 +14,9 @@
   * FUSE ISO (YourGitHubName)
   * Fuse-Zip (YourGitHubName)
   * GCSF (YourGitHubName)
-  * GDFS (YourGitHubName)
+  * GDFS (kalEl2001)
   * NFS (YourGitHubName)
   * OSNS (YourGitHubName)
   * SSHFS (YourGitHubName)
 
-### This is the way!
-
+### This is the way
