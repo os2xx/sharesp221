@@ -1,4 +1,2 @@
 This is a demonstration package for GNU Automake.
-Type ’info Automake’ to read the Automake manual.
-Makefile.am and src/Makefile.am contain Automake instructions
-for these two directories.
+Type 'info Automake' to read the Automake manual.
