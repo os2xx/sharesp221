@@ -13,7 +13,7 @@
   * ChunkSync and ChunkFs (YourGitHubName)
   * FUSE ISO (YourGitHubName)
   * Fuse-Zip (faishol01)
-  * GCSF (YourGitHubName)
+  * GCSF (sunnysani)
   * GDFS (kalEl2001)
   * NFS (dewa251202)
   * OSNS (YourGitHubName)
