@@ -11,7 +11,7 @@
   * Afuse (YourGitHubName)
   * BindFS (YourGitHubName)
   * ChunkSync and ChunkFs (YourGitHubName)
-  * FUSE ISO (YourGitHubName)
+  * FUSE ISO (aldariaski)
   * Fuse-Zip (faishol01)
   * GCSF (sunnysani)
   * GDFS (kalEl2001)
