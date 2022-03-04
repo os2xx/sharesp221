@@ -1,0 +1,22 @@
+.:
+total 20
+drwxr-xr-x 4 WhReen WhReen 4096 Mar  4 15:16 .
+drwxr-xr-x 5 WhReen WhReen 4096 Mar  4 15:14 ..
+-rw-r--r-- 1 WhReen WhReen    0 Mar  4 15:14 bbfs.log
+-rw-r--r-- 1 WhReen WhReen  185 Feb  4  2018 Makefile
+drwxr-xr-x 2 WhReen WhReen 4096 Mar  4 15:14 mountdir
+drwxr-xr-x 2 WhReen WhReen 4096 Mar  4 15:14 rootdir
+-rw-r--r-- 1 WhReen WhReen    0 Mar  4 15:16 W03-Fuse-ls-alR.txt
+
+./mountdir:
+total 12
+drwxr-xr-x 2 WhReen WhReen 4096 Mar  4 15:14 .
+drwxr-xr-x 4 WhReen WhReen 4096 Mar  4 15:16 ..
+-rw-r--r-- 1 WhReen WhReen  185 Mar  4 15:14 Makefile
+-rw-r--r-- 1 WhReen WhReen    0 Mar  4 15:14 touch-a-file.txt
+
+./rootdir:
+total 12
+drwxr-xr-x 2 WhReen WhReen 4096 Mar  4 15:14 .
+drwxr-xr-x 4 WhReen WhReen 4096 Mar  4 15:16 ..
+-rw-r--r-- 1 WhReen WhReen   11 Mar  4 15:14 bogus.txt
