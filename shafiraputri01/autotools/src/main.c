@@ -4,7 +4,7 @@ int
 main (void)
 {
     puts ("Hello World!");
-    puts ("I am cbkadal and this is " PACKAGE_STRING ".");
+    puts ("I am shafiraputri01 and this is " PACKAGE_STRING ".");
     return 0;
 }
 
