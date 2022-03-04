@@ -9,7 +9,7 @@
   * For the following weeks, the consecutive filenames will be "W02.txt", "W03.txt", and so on.
 * Select a FUSE topic and replace "YourGitHubName" with your GitHub Account. One topic one person.
   * Afuse (YourGitHubName)
-  * BindFS (YourGitHubName)
+  * BindFS (WhReen)
   * ChunkSync and ChunkFs (YourGitHubName)
   * FUSE ISO (aldariaski)
   * Fuse-Zip (faishol01)
