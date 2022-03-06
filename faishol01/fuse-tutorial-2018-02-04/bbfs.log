@@ -1,0 +1,1317 @@
+
+bb_init()
+    conn:
+    proto_major = 7
+    proto_minor = 35
+    async_read = 1
+    max_write = 131072
+    max_readahead = 131072
+    capable = 00000ffb
+    want = 00000010
+    max_background = 0
+    congestion_threshold = 0
+    context:
+    fuse = f10117b0
+    uid = 0
+    gid = 0
+    pid = 0
+    private_data = f10102a0
+    logfile = f10112d0
+    rootdir = /home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir
+    umask = 00000
+
+bb_getattr(path="/", statbuf=0x7ab5cc10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_getxattr(path = "/", name = "security.selinux", value = 0x6c000c30, size = 255)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_getxattr(path = "/", name = "system.posix_acl_access", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_getxattr(path = "/", name = "system.posix_acl_default", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_opendir(path="/", fi=0x7ab5cc30)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    opendir returned 0x0x7faa740020e0
+    fi:
+    flags = 0x00018800
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa740020e0
+    lock_owner = 0x0000000000000000
+
+bb_readdir(path="/", buf=0x74002060, filler=0x7ad82ac0, offset=0, fi=0x7a339c30)
+    readdir returned 0x0x7faa74002110
+calling filler with name bogus.txt
+calling filler with name ..
+calling filler with name .
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa740020e0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa740020e0
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/bogus.txt", statbuf=0x7ab5cc40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793389
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 11
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb33
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_getxattr(path = "/bogus.txt", name = "security.selinux", value = 0x6c000c30, size = 255)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_getxattr(path = "/bogus.txt", name = "system.posix_acl_access", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_getxattr(path = "/", name = "security.selinux", value = 0x6c000c30, size = 255)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_getxattr(path = "/", name = "system.posix_acl_access", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_getxattr(path = "/", name = "system.posix_acl_default", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_releasedir(path="/", fi=0x7a339c30)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa740020e0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa740020e0
+    lock_owner = 0x0000000000000000
+
+bb_opendir(path="/", fi=0x7ab5cc30)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    opendir returned 0x0x7faa7400a2d0
+    fi:
+    flags = 0x00008000
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa7400a2d0
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/", statbuf=0x7a339c10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_releasedir(path="/", fi=0x7ab5cc30)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa7400a2d0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa7400a2d0
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/", statbuf=0x7a339c10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_opendir(path="/", fi=0x7ab5cc30)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    opendir returned 0x0x7faa7400a2d0
+    fi:
+    flags = 0x00018800
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa7400a2d0
+    lock_owner = 0x0000000000000000
+
+bb_readdir(path="/", buf=0x740021f0, filler=0x7ad82ac0, offset=0, fi=0x7a339c30)
+    readdir returned 0x0x7faa7400a300
+calling filler with name bogus.txt
+calling filler with name ..
+calling filler with name .
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa7400a2d0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa7400a2d0
+    lock_owner = 0x0000000000000000
+
+bb_releasedir(path="/", fi=0x7a339c30)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa7400a2d0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa7400a2d0
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/", statbuf=0x7ab5cc10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_getattr(path="/bogus.txt", statbuf=0x7a339c40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793389
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 11
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb33
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_getattr(path="/bogus.txt", statbuf=0x7ab5cc40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793389
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 11
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb33
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_open(path"/bogus.txt", fi=0x7a339cf0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    open returned 5
+    fi:
+    flags = 0x00008000
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+
+bb_read(path="/bogus.txt", buf=0x740022c0, size=4096, offset=0, fi=0x7ab5ccf0)
+    fi:
+    flags = 0x00008000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    pread returned 11
+
+bb_flush(path="/bogus.txt", fi=0x7a339cf0)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0xf3d4f15296398501
+
+bb_release(path="/bogus.txt", fi=0x7ab5ccf0)
+    fi:
+    flags = 0x00008000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    close returned 0
+
+bb_getattr(path="/", statbuf=0x7a339c10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_opendir(path="/", fi=0x7ab5cc30)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    opendir returned 0x0x7faa7400a2d0
+    fi:
+    flags = 0x00038800
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa7400a2d0
+    lock_owner = 0x0000000000000000
+
+bb_statfs(path="/", statv=0x7a339c70)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    statvfs returned 0
+    sv:
+    f_bsize = 4096
+    f_frsize = 4096
+    f_blocks = 3855330
+    f_bfree = 1914293
+    f_bavail = 1713001
+    f_files = 987360
+    f_ffree = 832985
+    f_favail = 832985
+    f_fsid = 6405395523581177705
+    f_flag = 0x00001000
+    f_namemax = 255
+
+bb_readdir(path="/", buf=0x740022c0, filler=0x7ad82ac0, offset=0, fi=0x7ab5cc30)
+    readdir returned 0x0x7faa7400a300
+calling filler with name bogus.txt
+calling filler with name ..
+calling filler with name .
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa7400a2d0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa7400a2d0
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/bogus.txt", statbuf=0x7ab5cc40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793389
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 11
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fbe4
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_releasedir(path="/", fi=0x7a339c30)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa7400a2d0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa7400a2d0
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/", statbuf=0x7ab5cc10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_getattr(path="/", statbuf=0x7a339c10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_access(path="/", mask=01)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+
+bb_opendir(path="/", fi=0x7a339c30)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    opendir returned 0x0x7faa6c0016d0
+    fi:
+    flags = 0x00018800
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa6c0016d0
+    lock_owner = 0x0000000000000000
+
+bb_readdir(path="/", buf=0x6c001650, filler=0x7ad82ac0, offset=0, fi=0x7ab5cc30)
+    readdir returned 0x0x7faa6c001700
+calling filler with name bogus.txt
+calling filler with name ..
+calling filler with name .
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa6c0016d0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa6c0016d0
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/bogus.txt", statbuf=0x7a339c40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793389
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 11
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fbe4
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_releasedir(path="/", fi=0x7a339c30)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa6c0016d0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa6c0016d0
+    lock_owner = 0x0000000000000000
+
+bb_opendir(path="/", fi=0x7ab5cc30)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    opendir returned 0x0x7faa7400a2d0
+    fi:
+    flags = 0x00018800
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa7400a2d0
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/", statbuf=0x7a339c10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_readdir(path="/", buf=0x74002b60, filler=0x7ad82ac0, offset=0, fi=0x7ab5cc30)
+    readdir returned 0x0x7faa7400a300
+calling filler with name bogus.txt
+calling filler with name ..
+calling filler with name .
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa7400a2d0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa7400a2d0
+    lock_owner = 0x0000000000000000
+
+bb_releasedir(path="/", fi=0x7ab5cc30)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa7400a2d0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa7400a2d0
+    lock_owner = 0x0000000000000000
+
+bb_opendir(path="/", fi=0x7a339c30)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    opendir returned 0x0x7faa6c001750
+    fi:
+    flags = 0x00018800
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa6c001750
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/", statbuf=0x7ab5cc10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_readdir(path="/", buf=0x6c0016d0, filler=0x7ad82ac0, offset=0, fi=0x7a339c30)
+    readdir returned 0x0x7faa6c001780
+calling filler with name bogus.txt
+calling filler with name ..
+calling filler with name .
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa6c001750
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa6c001750
+    lock_owner = 0x0000000000000000
+
+bb_releasedir(path="/", fi=0x7a339c30)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa6c001750
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa6c001750
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/", statbuf=0x7ab5cc10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_getattr(path="/bogus.txt", statbuf=0x7a339c40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793389
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 11
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fbe4
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_open(path"/bogus.txt", fi=0x7ab5ccf0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    open returned 5
+    fi:
+    flags = 0x00008000
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+
+bb_read(path="/bogus.txt", buf=0x6c0017a0, size=4096, offset=0, fi=0x7a339cf0)
+    fi:
+    flags = 0x00008000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    pread returned 11
+
+bb_flush(path="/bogus.txt", fi=0x7ab5ccf0)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x72b41373984fbaaa
+
+bb_release(path="/bogus.txt", fi=0x7a339cf0)
+    fi:
+    flags = 0x00008000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    close returned 0
+
+bb_getattr(path="/", statbuf=0x7ab5cc10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_getattr(path="/", statbuf=0x7a339c10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_access(path="/", mask=01)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+
+bb_opendir(path="/", fi=0x7a339c30)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    opendir returned 0x0x7faa6c001820
+    fi:
+    flags = 0x00018800
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa6c001820
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/", statbuf=0x7ab5cc10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_readdir(path="/", buf=0x6c0017a0, filler=0x7ad82ac0, offset=0, fi=0x7a339c30)
+    readdir returned 0x0x7faa6c001850
+calling filler with name bogus.txt
+calling filler with name ..
+calling filler with name .
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa6c001820
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa6c001820
+    lock_owner = 0x0000000000000000
+
+bb_releasedir(path="/", fi=0x7a339c30)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7faa6c001820
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007faa6c001820
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/", statbuf=0x7ab5cc10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_getattr(path="/bogus.txt", statbuf=0x7a339c40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793389
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 11
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fbe4
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_access(path="/", mask=01)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+
+bb_access(path="/", mask=02)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+
+bb_getattr(path="/.bogus.txt.swp", statbuf=0x7ab5cc40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    lstat returned -1
+    ERROR lstat: No such file or directory
+    si:
+    st_dev = 0
+    st_ino = 0
+    st_mode = 00
+    st_nlink = 0
+    st_uid = 0
+    st_gid = 0
+    st_rdev = 0
+    st_size = 0
+    st_blksize = 0
+    st_blocks = 0
+    st_atime = 0x00000000
+    st_mtime = 0x00000000
+    st_ctime = 0x00000000
+
+bb_getattr(path="/.bogus.txt.swp", statbuf=0x7a339c40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    lstat returned -1
+    ERROR lstat: No such file or directory
+    si:
+    st_dev = 0
+    st_ino = 0
+    st_mode = 00
+    st_nlink = 0
+    st_uid = 0
+    st_gid = 0
+    st_rdev = 0
+    st_size = 0
+    st_blksize = 0
+    st_blocks = 0
+    st_atime = 0x00000000
+    st_mtime = 0x00000000
+    st_ctime = 0x00000000
+
+bb_getattr(path="/.bogus.txt.swp", statbuf=0x7ab5cc40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    lstat returned -1
+    ERROR lstat: No such file or directory
+    si:
+    st_dev = 0
+    st_ino = 0
+    st_mode = 00
+    st_nlink = 0
+    st_uid = 0
+    st_gid = 0
+    st_rdev = 0
+    st_size = 0
+    st_blksize = 0
+    st_blocks = 0
+    st_atime = 0x00000000
+    st_mtime = 0x00000000
+    st_ctime = 0x00000000
+
+bb_mknod(path="/.bogus.txt.swp", mode=0100644, dev=0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    open returned 5
+    close returned 0
+
+bb_getattr(path="/.bogus.txt.swp", statbuf=0x7ab5cc40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793402
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 0
+    st_blksize = 4096
+    st_blocks = 0
+    st_atime = 0x6224fc57
+    st_mtime = 0x6224fc57
+    st_ctime = 0x6224fc57
+
+bb_open(path"/.bogus.txt.swp", fi=0x7a339cf0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    open returned 5
+    fi:
+    flags = 0x00008001
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+
+bb_getxattr(path = "/.bogus.txt.swp", name = "security.capability", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_write(path="/.bogus.txt.swp", buf=0x7ab5e060, size=1024, offset=0, fi=0x7ab5cd50)
+    fi:
+    flags = 0x00008001
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    pwrite returned 1024
+
+bb_flush(path="/.bogus.txt.swp", fi=0x7a339cf0)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0xefcc8ebaedfe8d98
+
+bb_release(path="/.bogus.txt.swp", fi=0x7ab5ccf0)
+    fi:
+    flags = 0x00008001
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    close returned 0
+
+bb_open(path"/bogus.txt", fi=0x7a339cf0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    open returned 5
+    fi:
+    flags = 0x00008000
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+
+bb_read(path="/bogus.txt", buf=0x74002ff0, size=4096, offset=0, fi=0x7ab5ccf0)
+    fi:
+    flags = 0x00008000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    pread returned 11
+
+bb_flush(path="/bogus.txt", fi=0x7a339cf0)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0xefcc8ebaedfe8d98
+
+bb_release(path="/bogus.txt", fi=0x7ab5ccf0)
+    fi:
+    flags = 0x00008000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    close returned 0
+
+bb_access(path="/bogus.txt", mask=02)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+
+bb_getattr(path="/bogus.txt", statbuf=0x7ab5cc10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793389
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 11
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fbe4
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_getattr(path="/.bogus.txt.swp", statbuf=0x7a339c40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793402
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 1024
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fc57
+    st_mtime = 0x6224fc57
+    st_ctime = 0x6224fc57
+bb_unlink(path="/.bogus.txt.swp")
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    unlink returned 0
+
+bb_getattr(path="/.bogus.txt.swp", statbuf=0x7ab5cc40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    lstat returned -1
+    ERROR lstat: No such file or directory
+    si:
+    st_dev = 0
+    st_ino = 0
+    st_mode = 00
+    st_nlink = 0
+    st_uid = 0
+    st_gid = 0
+    st_rdev = 0
+    st_size = 0
+    st_blksize = 0
+    st_blocks = 0
+    st_atime = 0x00000000
+    st_mtime = 0x00000000
+    st_ctime = 0x00000000
+
+bb_mknod(path="/.bogus.txt.swp", mode=0100644, dev=0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    open returned 5
+    close returned 0
+
+bb_getattr(path="/.bogus.txt.swp", statbuf=0x79b16c40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793402
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 0
+    st_blksize = 4096
+    st_blocks = 0
+    st_atime = 0x6224fc5a
+    st_mtime = 0x6224fc5a
+    st_ctime = 0x6224fc5a
+
+bb_open(path"/.bogus.txt.swp", fi=0x7a339cf0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    open returned 5
+    fi:
+    flags = 0x00008001
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+
+bb_getxattr(path = "/.bogus.txt.swp", name = "security.capability", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_write(path="/.bogus.txt.swp", buf=0x79b18060, size=1024, offset=0, fi=0x79b16d50)
+    fi:
+    flags = 0x00008001
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    pwrite returned 1024
+
+bb_flush(path="/.bogus.txt.swp", fi=0x7a339cf0)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0xefcc8ebaedfe8d98
+
+bb_release(path="/.bogus.txt.swp", fi=0x7ab5ccf0)
+    fi:
+    flags = 0x00008001
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    close returned 0
+
+bb_getattr(path="/bogus.txt", statbuf=0x79b16c40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793389
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 11
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fbe4
+    st_mtime = 0x6224fb33
+    st_ctime = 0x6224fb33
+
+bb_open(path"/bogus.txt", fi=0x7a339cf0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    open returned 5
+    fi:
+    flags = 0x00008001
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+
+bb_getxattr(path = "/bogus.txt", name = "security.capability", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_truncate(path="/bogus.txt", newsize=0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    truncate returned 0
+
+bb_getattr(path="/bogus.txt", statbuf=0x79b16b70)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793389
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 0
+    st_blksize = 4096
+    st_blocks = 0
+    st_atime = 0x6224fbe4
+    st_mtime = 0x6224fc5b
+    st_ctime = 0x6224fc5b
+
+bb_getxattr(path = "/bogus.txt", name = "security.capability", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_write(path="/bogus.txt", buf=0x7ab5e060, size=15, offset=0, fi=0x7ab5cd50)
+    fi:
+    flags = 0x00008001
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    pwrite returned 15
+
+bb_fsync(path="/bogus.txt", datasync=0, fi=0x79b16cf0)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    fsync returned 0
+
+bb_flush(path="/bogus.txt", fi=0x7a339cf0)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0xefcc8ebaedfe8d98
+
+bb_release(path="/bogus.txt", fi=0x7a339cf0)
+    fi:
+    flags = 0x00008001
+    fh_old = 0x00000005
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x0000000000000005
+    lock_owner = 0x0000000000000000
+    close returned 0
+
+bb_getattr(path="/bogus.txt", statbuf=0x7ab5cc10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793389
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 15
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fbe4
+    st_mtime = 0x6224fc5b
+    st_ctime = 0x6224fc5b
+
+bb_getattr(path="/.bogus.txt.swp", statbuf=0x7a339c40)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793402
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 1024
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fc5a
+    st_mtime = 0x6224fc5a
+    st_ctime = 0x6224fc5a
+bb_unlink(path="/.bogus.txt.swp")
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/.bogus.txt.swp", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/.bogus.txt.swp"
+    unlink returned 0
+
+bb_getattr(path="/", statbuf=0x7a339c10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fc5b
+    st_ctime = 0x6224fc5b
+
+bb_getattr(path="/", statbuf=0x79b16c10)
+    bb_fullpath:  rootdir = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/faishol01/sharesp221/faishol01/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 793388
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1000
+    st_gid = 1000
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6224fb52
+    st_mtime = 0x6224fc5b
+    st_ctime = 0x6224fc5b
+
+bb_destroy(userdata=0xf10102a0)
