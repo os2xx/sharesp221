@@ -16,7 +16,7 @@
   * GCSF (sunnysani)
   * GDFS (kalEl2001)
   * NFS (dewa251202)
-  * OSNS (YourGitHubName)
+  * OSNS (azhar81)
   * SSHFS (YourGitHubName)
 
 ### This is the way

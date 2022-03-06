@@ -1,0 +1,23 @@
+
+bb_init()
+    conn:
+    proto_major = 7
+    proto_minor = 32
+    async_read = 1
+    max_write = 131072
+    max_readahead = 131072
+    capable = 00000ffb
+    want = 00000010
+    max_background = 0
+    congestion_threshold = 0
+    context:
+    fuse = 624237b0
+    uid = 0
+    gid = 0
+    pid = 0
+    private_data = 624222a0
+    logfile = 624232d0
+    rootdir = /home/azhar81/git/sharesp221/azhar81/fuse-tutorial-2018-02-04/example/rootdir
+    umask = 00000
+
+bb_destroy(userdata=0x624222a0)
