@@ -1,0 +1,22 @@
+.:
+total 40
+drwxr-xr-x 4 sunnysani sunnysani  4096 Mar  7 10:17 .
+drwxr-xr-x 5 sunnysani sunnysani  4096 Mar  7 10:16 ..
+-rw-r--r-- 1 sunnysani sunnysani 16698 Mar  7 10:16 bbfs.log
+-rw-r--r-- 1 sunnysani sunnysani   185 Feb  4  2018 Makefile
+drwxr-xr-x 2 sunnysani sunnysani  4096 Mar  7 10:16 mountdir
+drwxr-xr-x 2 sunnysani sunnysani  4096 Mar  7 10:16 rootdir
+-rw-r--r-- 1 sunnysani sunnysani     0 Mar  7 10:17 W03-Fuse-ls-alR.txt
+
+./mountdir:
+total 8
+drwxr-xr-x 2 sunnysani sunnysani 4096 Mar  7 10:16 .
+drwxr-xr-x 4 sunnysani sunnysani 4096 Mar  7 10:17 ..
+
+./rootdir:
+total 16
+drwxr-xr-x 2 sunnysani sunnysani 4096 Mar  7 10:16 .
+drwxr-xr-x 4 sunnysani sunnysani 4096 Mar  7 10:17 ..
+-rw-r--r-- 1 sunnysani sunnysani   11 Mar  7 10:16 bogus.txt
+-rw-r--r-- 1 sunnysani sunnysani  185 Mar  7 10:16 Makefile
+-rw-r--r-- 1 sunnysani sunnysani    0 Mar  7 10:16 touch-a-file.txt
