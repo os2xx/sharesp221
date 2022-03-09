@@ -1,0 +1,138 @@
+
+bb_init()
+    conn:
+    proto_major = 7
+    proto_minor = 32
+    async_read = 1
+    max_write = 131072
+    max_readahead = 131072
+    capable = 00000ffb
+    want = 00000010
+    max_background = 0
+    congestion_threshold = 0
+    context:
+    fuse = e64b27b0
+    uid = 0
+    gid = 0
+    pid = 0
+    private_data = e64b12a0
+    logfile = e64b22d0
+    rootdir = /home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir
+    umask = 00000
+
+bb_getattr(path="/", statbuf=0xa3e02c10)
+    bb_fullpath:  rootdir = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 805223
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1001
+    st_gid = 1001
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6228707f
+    st_mtime = 0x6228705e
+    st_ctime = 0x6228705e
+
+bb_getxattr(path = "/", name = "security.selinux", value = 0x9c001e30, size = 255)
+    bb_fullpath:  rootdir = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir/"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_getxattr(path = "/", name = "system.posix_acl_access", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir/"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_getxattr(path = "/", name = "system.posix_acl_default", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir/"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_opendir(path="/", fi=0xa3e02c30)
+    bb_fullpath:  rootdir = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir/"
+    opendir returned 0x0x7f2a94000ee0
+    fi:
+    flags = 0x00018800
+    fh_old = 0x00000000
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007f2a94000ee0
+    lock_owner = 0x0000000000000000
+
+bb_readdir(path="/", buf=0x94000e60, filler=0xa4842ac0, offset=0, fi=0xa4625c30)
+    readdir returned 0x0x7f2a94000f10
+calling filler with name bogus.txt
+calling filler with name ..
+calling filler with name .
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7f2a94000ee0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007f2a94000ee0
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/bogus.txt", statbuf=0xa3e02c40)
+    bb_fullpath:  rootdir = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 805224
+    st_mode = 0100644
+    st_nlink = 1
+    st_uid = 1001
+    st_gid = 1001
+    st_rdev = 0
+    st_size = 11
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6228705e
+    st_mtime = 0x6228705e
+    st_ctime = 0x6228705e
+
+bb_getxattr(path = "/bogus.txt", name = "security.selinux", value = 0x9c001e30, size = 255)
+    bb_fullpath:  rootdir = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_getxattr(path = "/bogus.txt", name = "system.posix_acl_access", value = 0x00000000, size = 0)
+    bb_fullpath:  rootdir = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir", path = "/bogus.txt", fpath = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir/bogus.txt"
+    lgetxattr returned -1
+    ERROR lgetxattr: No data available
+
+bb_releasedir(path="/", fi=0xa3e02c30)
+    fi:
+    flags = 0x00000000
+    fh_old = 0x7f2a94000ee0
+    writepage = 0
+    direct_io = 0
+    keep_cache = 0
+    fh = 0x00007f2a94000ee0
+    lock_owner = 0x0000000000000000
+
+bb_getattr(path="/", statbuf=0xa4625c10)
+    bb_fullpath:  rootdir = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir", path = "/", fpath = "/home/kalEl2001/git/sharesp221/kalEl2001/fuse-tutorial-2018-02-04/example/rootdir/"
+    lstat returned 0
+    si:
+    st_dev = 2050
+    st_ino = 805223
+    st_mode = 040755
+    st_nlink = 2
+    st_uid = 1001
+    st_gid = 1001
+    st_rdev = 0
+    st_size = 4096
+    st_blksize = 4096
+    st_blocks = 8
+    st_atime = 0x6228707f
+    st_mtime = 0x6228705e
+    st_ctime = 0x6228705e
+
+bb_destroy(userdata=0xe64b12a0)
