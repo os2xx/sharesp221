@@ -1,3 +1,10 @@
+/*
+    FUSE: Filesystem in Userspace
+    Copyright (C) 2001-2005  Miklos Szeredi <miklos@szeredi.hu>
+    This program can be distributed under the terms of the GNU GPL.
+    See the file COPYING.
+*/
+
 #include <fuse.h>
 #include <stdio.h>
 #include <string.h>
