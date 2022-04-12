@@ -1,0 +1,20 @@
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/loop0          7900    15      7476   1% /mnt/mnt
+/mnt/mnt/:
+total 18
+drwxrwxrwt 4 root      root       1024 Apr 12 13:34 .
+drwxr-xr-x 4 root      root       4096 Apr 12 13:24 ..
+drwxr-xr-x 2 faishol01 faishol01  1024 Apr 12 13:29 faishol01
+drwx------ 2 root      root      12288 Apr 12 13:19 lost+found
+-rw-r--r-- 1 root      root          0 Apr 12 13:34 newFile.txt
+
+/mnt/mnt/faishol01:
+total 2
+drwxr-xr-x 2 faishol01 faishol01 1024 Apr 12 13:29 .
+drwxrwxrwt 4 root      root      1024 Apr 12 13:34 ..
+-rw-r--r-- 1 faishol01 faishol01    0 Apr 12 13:29 faishol01.txt
+
+/mnt/mnt/lost+found:
+total 13
+drwx------ 2 root root 12288 Apr 12 13:19 .
+drwxrwxrwt 4 root root  1024 Apr 12 13:34 ..
