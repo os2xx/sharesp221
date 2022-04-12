@@ -1,0 +1,20 @@
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/loop0          8849    15      8374   1% /mnt/mnt
+/mnt/mnt/:
+total 18
+drwxrwxrwt 4 root   root    1024 Apr 12 13:46 .
+drwxr-xr-x 4 root   root    4096 Apr 12 13:39 ..
+drwx------ 2 root   root   12288 Apr 12 13:38 lost+found
+-rw-r--r-- 1 root   root       0 Apr 12 13:46 newFile.txt
+drwxr-xr-x 2 WhReen WhReen  1024 Apr 12 13:43 WhReen
+
+/mnt/mnt/lost+found:
+total 13
+drwx------ 2 root root 12288 Apr 12 13:38 .
+drwxrwxrwt 4 root root  1024 Apr 12 13:46 ..
+
+/mnt/mnt/WhReen:
+total 2
+drwxr-xr-x 2 WhReen WhReen 1024 Apr 12 13:43 .
+drwxrwxrwt 4 root   root   1024 Apr 12 13:46 ..
+-rw-r--r-- 1 WhReen WhReen    0 Apr 12 13:43 WhReen.txt
