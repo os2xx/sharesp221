@@ -1,0 +1,6 @@
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/sdc            9833    14      9307   1% /mnt/mnt
+total 17
+drwxr-xr-x 3 root root  1024 Apr 18 21:41 .
+drwxr-xr-x 5 root root  4096 Apr 18 21:42 ..
+drwx------ 2 root root 12288 Apr 18 21:41 lost+found
