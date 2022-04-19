@@ -1,5 +1,6 @@
 obj-m += hello01.o
 obj-m += hello02.o
+hello02-objs := hello02a.o hello02b.o
 
 PWD := $(CURDIR)
 
@@ -30,4 +31,22 @@ H01del:
 		exit 1;\
 	else\
 		rmmod hello01.ko;\
+	fi
+
+H02ins:
+	@if ! [ "$(shell id -u)" = 0 ]; then\
+		echo "ROOT only!";\
+		exit 1;\
+	else\
+		insmod hello02.ko;\
+		modinfo hello02.ko;\
+		lsmod | grep hello02;\
+	fi
+
+H02del:
+	@if ! [ "$(shell id -u)" = 0 ]; then\
+		echo "ROOT only!";\
+		exit 1;\
+	else\
+		rmmod hello02.ko;\
 	fi
