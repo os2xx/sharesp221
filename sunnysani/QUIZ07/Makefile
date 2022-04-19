@@ -32,3 +32,19 @@ ifneq ($(EUID),0)
 	@exit 1
 endif
 	rmmod hello01
+
+H02ins:
+ifneq ($(EUID),0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	insmod hello02.ko
+	modinfo hello02.ko
+	lsmod   | grep hello02
+
+H02del:
+ifneq ($(EUID),0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	rmmod hello02
