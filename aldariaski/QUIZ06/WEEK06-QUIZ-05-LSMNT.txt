@@ -1,0 +1,2 @@
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/sdc           10817    14     10240   1% /mnt/mnt

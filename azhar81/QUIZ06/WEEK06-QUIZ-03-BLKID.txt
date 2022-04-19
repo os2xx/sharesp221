@@ -1,0 +1,5 @@
+/dev/sda1: UUID="0bf4b0aa-312d-49c9-acf2-fcfe538ba3a8" TYPE="swap" PARTUUID="cb2bb90a-01"
+/dev/sda2: UUID="428a59bb-bb96-440c-b0e2-7bcf07943959" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="cb2bb90a-02"
+/dev/sdb1: UUID="97fc0e1b-cbc3-45f2-8c7e-61ae3c074d50" TYPE="swap" PARTUUID="fc66ff00-01"
+/dev/sdb2: UUID="1ad4eeab-2dd8-4ed4-9cd5-01e04f79d133" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="fc66ff00-02"
+/dev/sdc: UUID="88ae0842-99e0-4cab-b69a-7e1d389d0f9c" BLOCK_SIZE="1024" TYPE="ext2"

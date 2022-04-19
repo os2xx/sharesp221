@@ -1,0 +1,3 @@
+Disk /dev/sda: 16 GiB, 17179869184 bytes, 33554432 sectors
+Disk /dev/sdb: 32 GiB, 34359738368 bytes, 67108864 sectors
+Disk /dev/sdc: 10 MiB, 10485760 bytes, 20480 sectors

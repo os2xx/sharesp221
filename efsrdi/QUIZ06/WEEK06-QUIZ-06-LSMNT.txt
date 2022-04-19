@@ -1,0 +1,4 @@
+total 17
+drwxrwxrwt 3 root root  1024 Apr 18 21:41 .
+drwxr-xr-x 5 root root  4096 Apr 18 21:42 ..
+drwx------ 2 root root 12288 Apr 18 21:41 lost+found
