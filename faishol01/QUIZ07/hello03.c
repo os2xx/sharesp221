@@ -26,7 +26,7 @@ static int _init_3(void)
     pr_info("ZCZC M03 myint integer: %d\n", myint); 
     pr_info("ZCZC M03 mylong long integer: %ld\n", mylong); 
     pr_info("ZCZC M03 mystring string: %s\n", mystring);
-    for (i = 0; i < ARRAY_SIZE(myintarray); i++) 
+    for (int i = 0; i < ARRAY_SIZE(myintarray); i++) 
         pr_info("ZCZC M03 myintarray[%d]: %d\n", i, myintarray[i]);
     pr_info("ZCZC M03 myintArray %d argc", arr_argc);
     return 0;

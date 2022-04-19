@@ -1,12 +1,13 @@
 /*
- * hello-1.c - The simplest kernel module.
+ * hello02b.c - separate module.
  */
 #include <linux/kernel.h> /* Needed for pr_info() */
 #include <linux/module.h> /* Needed by all modules */
 
-void cleanup_module(void)
+void _exit_2(void)
 {
     pr_info("ZCZC M02 hello02 STOP\n");
 }
 
+module_exit(_exit_2);
 MODULE_LICENSE("GPL");

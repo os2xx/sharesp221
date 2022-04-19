@@ -1,6 +1,8 @@
 obj-m += hello01.o
 obj-m += hello02.o
 hello02-objs += hello02a.o hello02b.o
+obj-m += hello03.o
+obj-m += hello04.o
 
 EUID=$(shell id -u)
 PWD := $(CURDIR)

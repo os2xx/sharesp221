@@ -1,10 +1,10 @@
 /*
- * hello-1.c - The simplest kernel module.
+ * hello02a.c - separate module
  */
 #include <linux/kernel.h> /* Needed for pr_info() */
 #include <linux/module.h> /* Needed by all modules */
 
-int init_module(void)
+static int _init_2(void)
 {
     pr_info("ZCZC M02 hello02 START\n");
 
@@ -12,4 +12,5 @@ int init_module(void)
     return 0;
 }
 
+module_init(_init_2);
 MODULE_LICENSE("GPL");
