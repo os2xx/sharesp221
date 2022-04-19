@@ -1,5 +1,6 @@
 obj-m += hello01.o
-ccflags-y := -std=gnu18
+obj-m += hello02.o
+hello02-objs := hello02a.o hello02b.o
 
 all:
 ifeq ($(shell id -u), 0)
@@ -23,6 +24,22 @@ ifneq ($(shell id -u), 0)
 	@exit 1
 endif
 	rmmod   hello01
+
+H02ins:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	insmod  hello02.ko
+	modinfo hello02.ko
+	lsmod   | grep hello02
+
+H02del:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	rmmod   hello02
 
 clean:
 	+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) clean
