@@ -1,6 +1,7 @@
 obj-m += hello01.o
 obj-m += hello02.o
 hello02-objs := hello02a.o hello02b.o
+obj-m += hello03.o
 
 all:
 ifeq ($(shell id -u), 0)
@@ -40,6 +41,22 @@ ifneq ($(shell id -u), 0)
 	@exit 1
 endif
 	rmmod   hello02
+
+H03ins:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	insmod  hello03.ko
+	modinfo hello03.ko
+	lsmod   | grep hello03
+
+H03del:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	rmmod   hello03
 
 clean:
 	+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) clean
