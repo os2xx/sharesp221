@@ -1,0 +1,20 @@
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/loop0          9833    15      9306   1% /mnt/mnt
+/mnt/mnt/:
+total 18
+drwxrwxrwt 4 root   root    1024 Apr 18 22:03 .
+drwxr-xr-x 5 root   root    4096 Apr 18 21:42 ..
+drwxr-xr-x 2 efsrdi efsrdi  1024 Apr 18 21:52 efsrdi
+drwx------ 2 root   root   12288 Apr 18 21:41 lost+found
+-rw-r--r-- 1 root   root       0 Apr 18 22:03 newFile.txt
+
+/mnt/mnt/efsrdi:
+total 2
+drwxr-xr-x 2 efsrdi efsrdi 1024 Apr 18 21:52 .
+drwxrwxrwt 4 root   root   1024 Apr 18 22:03 ..
+-rw-r--r-- 1 efsrdi efsrdi    0 Apr 18 21:52 efsrdi.txt
+
+/mnt/mnt/lost+found:
+total 13
+drwx------ 2 root root 12288 Apr 18 21:41 .
+drwxrwxrwt 4 root root  1024 Apr 18 22:03 ..

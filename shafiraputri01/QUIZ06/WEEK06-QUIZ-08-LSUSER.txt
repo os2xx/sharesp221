@@ -1,0 +1,3 @@
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/sdc           10817    15     10239   1% /mnt/mnt
+-rw-r--r-- 1 shafiraputri01 shafiraputri01 0 Apr 12 13:26 /mnt/mnt/shafiraputri01/shafiraputri01.txt

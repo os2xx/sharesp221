@@ -1,0 +1,5 @@
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/sda2       15421320 6674920   7941232  46% /
+total 8
+drwxr-xr-x 2 root root 4096 Apr 12 13:20 .
+drwxr-xr-x 4 root root 4096 Apr 12 13:20 ..

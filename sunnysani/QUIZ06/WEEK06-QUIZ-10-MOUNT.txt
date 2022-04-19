@@ -1,0 +1,1 @@
+mount: /dev/loop0 mounted on /mnt/mnt.
