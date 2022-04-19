@@ -49,3 +49,19 @@ ifneq ($(EUID),0)
 endif
 	rmmod hello02
 
+H03ins:
+ifneq ($(EUID),0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	insmod hello03.ko myshort=69 myint=888 mylong=1234567890  mystring="newString" myintArray=1,2,3,4,5
+	modinfo hello03.ko
+	lsmod   | grep hello03
+
+H03del:
+ifneq ($(EUID),0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	rmmod hello03
+
