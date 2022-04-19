@@ -1,0 +1,4 @@
+Apr 19 14:04:47 kalEl2001 kernel: [ 4115.581125] ZCZC M01 hello01 START
+Apr 19 14:04:54 kalEl2001 kernel: [ 4121.879449] ZCZC M01 hello01 STOP
+Apr 19 14:51:01 kalEl2001 kernel: [  375.239159] ZCZC M02 hello02 START
+Apr 19 14:51:18 kalEl2001 kernel: [  392.529154] ZCZC M02 hello02 STOP
