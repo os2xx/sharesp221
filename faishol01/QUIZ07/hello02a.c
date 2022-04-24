@@ -14,3 +14,5 @@ static int _init_2(void)
 
 module_init(_init_2);
 MODULE_LICENSE("GPL");
+MODULE_AUTHOR("faishol01");
+MODULE_DESCRIPTION("hello02");

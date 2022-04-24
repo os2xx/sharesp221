@@ -2,6 +2,7 @@ obj-m += hello01.o
 obj-m += hello02.o
 hello02-objs += hello02a.o hello02b.o
 obj-m += hello03.o
+obj-m += hello04.o
 
 EUID=$(shell id -u)
 PWD := $(CURDIR)
@@ -65,4 +66,20 @@ ifneq ($(EUID),0)
 	@exit 1
 endif
 	rmmod hello03
+
+H04ins:
+ifneq ($(EUID),0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	insmod hello04.ko
+	modinfo hello04.ko
+	lsmod   | grep hello04
+
+H04del:
+ifneq ($(EUID),0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	rmmod hello04
 
