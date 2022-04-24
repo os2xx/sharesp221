@@ -5,14 +5,15 @@
 // (c) 2022-2022 It is a FREE GSGS one.
 #define ZCZCHEADER  "ZCZC M01"
 #define DESCRIPTION "hello01"
-#define AUTHOR      "C. BinKadal"
+#define AUTHOR      "C. BinKadal (Modified by WhReen)"
 #define LICENSE     "GPL"
 
-#include <linux/module.h>
-#include <linux/kernel.h>
+#include <linux/module.h> /* Needed for pr_info() */
+#include <linux/kernel.h> /* Needed by all modules */
 
 int init_module(void) {
     pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
+    /* A non 0 return means init_module failed; module can't be loaded. */
     return 0;
 }
 
@@ -24,4 +25,3 @@ MODULE_AUTHOR(AUTHOR);
 MODULE_DESCRIPTION(DESCRIPTION);
 MODULE_LICENSE(LICENSE);
 MODULE_VERSION(VERSION);
-
