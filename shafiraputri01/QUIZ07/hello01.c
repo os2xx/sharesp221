@@ -1,16 +1,17 @@
 /* 
  * hello-1.c - The simplest kernel module. 
  */ 
-
+#define ZCZCHEADER  "ZCZC M01"
 #define DESCRIPTION "hello01"
 #define AUTHOR      "shafiraputri01"
+#define LICENSE     "GPL"
 
 #include <linux/kernel.h> /* Needed for pr_info() */ 
 #include <linux/module.h> /* Needed by all modules */ 
  
 int init_module(void) 
 { 
-    pr_info("ZCZC M01 hello01 START\n"); 
+    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
  
     /* A non 0 return means init_module failed; module can't be loaded. */ 
     return 0; 
@@ -18,7 +19,10 @@ int init_module(void)
  
 void cleanup_module(void) 
 { 
-    pr_info("ZCZC M01 hello01 STOP\n"); 
+    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
 } 
  
-MODULE_LICENSE("GPL");
+MODULE_AUTHOR(AUTHOR);
+MODULE_DESCRIPTION(DESCRIPTION);
+MODULE_LICENSE(LICENSE);
+
