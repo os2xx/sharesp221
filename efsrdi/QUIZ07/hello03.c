@@ -7,24 +7,24 @@
 #include <linux/moduleparam.h> 
 #include <linux/stat.h> 
 
-static short int myshort = 69; 
-static int myint = 888; 
-static long int mylong = 1234567890; 
-static char *mystring = "newString"; 
-static int myintarray[5] = { 1, 2, 3, 4, 5 }; 
-static int arr_argc = 5; 
+static short int myshort = 1; 
+static int myint = 1234; 
+static long int mylong = 567890; 
+static char *mystring = "This is mystring"; 
+static int myintArray[5] = {}; 
+static int arr_argc = 0; 
 
 module_param(myshort, short, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP); 
-MODULE_PARM_DESC(myshort, "A short integer"); 
+MODULE_PARM_DESC(myshort, "ShortInteger"); 
 module_param(myint, int, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH); 
-MODULE_PARM_DESC(myint, "An integer"); 
+MODULE_PARM_DESC(myint, "Integer"); 
 module_param(mylong, long, S_IRUSR); 
-MODULE_PARM_DESC(mylong, "A long integer"); 
+MODULE_PARM_DESC(mylong, "LongInteger"); 
 module_param(mystring, charp, 0000); 
-MODULE_PARM_DESC(mystring, "A character string"); 
+MODULE_PARM_DESC(mystring, "MyString"); 
 
-module_param_array(myintarray, int, &arr_argc, 0000); 
-MODULE_PARM_DESC(myintarray, "An array of integers"); 
+module_param_array(myintArray, int, &arr_argc, 0000); 
+MODULE_PARM_DESC(myintArray, "Array[int]"); 
 
 static int __init hello_3_init(void)
 {
@@ -33,10 +33,13 @@ static int __init hello_3_init(void)
     pr_info("%s myshort short integer: %hd\n", ZCZCHEADER, myshort); 
     pr_info("%s myint integer: %d\n", ZCZCHEADER, myint); 
     pr_info("%s mylong long integer: %ld\n", ZCZCHEADER, mylong); 
-    pr_info("%s mystring string: %s\n", ZCZCHEADER, mystring);
-    for (i = 0; i < ARRAY_SIZE(myintarray); i++) 
-        pr_info("%s myintarray[%d]: %d\n", ZCZCHEADER, i, myintarray[i]);
-    pr_info("%s myintArray %d argc", ZCZCHEADER, arr_argc);
+    pr_info("%s mystring: %s\n", ZCZCHEADER, mystring);
+    for (i = 0; i < ARRAY_SIZE(myintArray); i++) 
+	if (arr_argc != 0)
+        	pr_info("%s myintArray[%d]: %d\n", ZCZCHEADER, i, myintArray[i]);
+	else
+		pr_info("%s myintArray[%d]: %s\n", ZCZCHEADER, i, "-1");
+    pr_info("%s myintArray %d argc\n", ZCZCHEADER, arr_argc);
     return 0;
 }
 
