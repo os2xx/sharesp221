@@ -1,14 +1,8 @@
-# REV04X Tue 19 Apr 2022 01:59:03 PM WIB
-# REV04 Mon 18 Apr 2022 23:00:00 WIB
-# REV03 Sun 17 Apr 2022 17:30:00 WIB
-# REV02 Tue 05 Apr 2022 12:30:00 WIB
-# REV01 Mon 04 Apr 2022 17:00:00 WIB
-# START Sun 03 Apr 2022 11:30:00 WIB
-# 
-
 obj-m          += hello01.o
-obj-m += hello02.o
-hello02-objs := hello02a.o hello02b.o
+obj-m          += hello02.o
+hello02-objs   := hello02a.o hello02b.o
+obj-m          += hello03.o
+obj-m          += hello04.o
 ccflags-y      := -std=gnu18
 
 all:
@@ -28,7 +22,6 @@ help:
 	@echo "HXdel"
 	@echo "help"
 
-# ZCZC 15
 H01ins:
 ifneq ($(shell id -u), 0)
 	@echo "ROOT only!"
@@ -37,6 +30,7 @@ endif
 	insmod  hello01.ko
 	modinfo hello01.ko
 	lsmod   | grep hello01
+
 H01del:
 ifneq ($(shell id -u), 0)
 	@echo "ROOT only!"
@@ -59,3 +53,35 @@ ifneq ($(shell id -u), 0)
 	@exit 1
 endif
 	rmmod   hello02
+
+H03ins:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	insmod  hello03.ko myshort=69 myint=888 mylong=1234567890  mystring="newString" myintArray=1,2,3,4,5
+	modinfo hello03.ko
+	lsmod   | grep hello03
+
+H03del:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	rmmod   hello03
+
+H04ins:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	insmod  hello04.ko
+	modinfo hello04.ko
+	lsmod   | grep hello04
+
+H04del:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	rmmod   hello04

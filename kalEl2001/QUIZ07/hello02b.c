@@ -6,6 +6,7 @@
 #define DESCRIPTION "hello02"
 #define AUTHOR      "Samuel"
 #define LICENSE     "GPL"
+#define VERSION     "REV00"
 
 static void __exit hello02_exit(void)
 {
