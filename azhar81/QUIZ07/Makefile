@@ -1,23 +1,41 @@
+# REV04X Tue 19 Apr 2022 01:59:03 PM WIB
+# REV04 Mon 18 Apr 2022 23:00:00 WIB
+# REV03 Sun 17 Apr 2022 17:30:00 WIB
+# REV02 Tue 05 Apr 2022 12:30:00 WIB
+# REV01 Mon 04 Apr 2022 17:00:00 WIB
+# START Sun 03 Apr 2022 11:30:00 WIB
+#
+
 obj-m += hello01.o
 obj-m += hello02.o
 hello02-objs += hello02a.o hello02b.o
 obj-m += hello03.o
+obj-m += hello04.o
 
 EUID=$(shell id -u)
 PWD := $(CURDIR)
 
-ccflags-y += -fanalyzer
+ccflags-y := -std=gnu18
 
 all:
 ifeq ($(EUID),0)
 	@echo "No ROOT, please!"
 	@exit 1
 endif
-	+make -C /lib/modules/$(shell uname -r)/build CC=$(CC) M=$(PWD) modules
+	+make -C /lib/modules/$(shell uname -r)/build  M=$(PWD) modules
 
 clean:
 	+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) clean
 
+help:
+	@echo "all"
+	@echo "clean"
+	@echo "HXins"
+	@echo "HXdel"
+	@echo "help"
+
+
+# ZCZC 15
 H01ins:
 ifneq ($(EUID),0)
 	@echo "ROOT only!"
@@ -65,3 +83,19 @@ ifneq ($(EUID),0)
 	@exit 1
 endif
 	rmmod hello03
+
+H04ins:
+ifneq ($(EUID),0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	insmod hello04.ko
+	modinfo hello04.ko
+	lsmod   | grep hello04
+
+H04del:
+ifneq ($(EUID),0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	rmmod hello04

@@ -1,54 +1,55 @@
-/*
- * hello03.c
- */
+#define ZCZCHEADER  "ZCZC M03"
+#define DESCRIPTION "hello03"
+#define AUTHOR      "azhar81"
+#define LICENSE     "GPL"
 
-#include <linux/kernel.h> /* We are doing kernel work */
-#include <linux/module.h>
 #include <linux/init.h>
-#include <linux/moduleparam.h> 
+#include <linux/kernel.h>
+#include <linux/module.h>
+#include <linux/moduleparam.h>
+#include <linux/stat.h>
 
-static short int myshort = 69; 
-static int myint = 888; 
-static long int mylong = 1234567890; 
-static char *mystring = "newString"; 
-static int myintarray[5] = { 1,2,3,4,5 }; 
-static int arr_argc = 0; 
- 
-module_param(myshort, short, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP); 
-MODULE_PARM_DESC(myshort, "A short integer"); 
-module_param(myint, int, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH); 
-MODULE_PARM_DESC(myint, "An integer"); 
-module_param(mylong, long, S_IRUSR); 
-MODULE_PARM_DESC(mylong, "A long integer"); 
-module_param(mystring, charp, 0000); 
-MODULE_PARM_DESC(mystring, "A character string"); 
- 
-module_param_array(myintarray, int, &arr_argc, 0000); 
-MODULE_PARM_DESC(myintarray, "An array of integers"); 
+static short int myshort = 1;
+static int myint = 1234;
+static long int mylong = 567890;
+static char *mystring = "This is mystring";
+static int myintArray[5] = { -1, -1, -1, -1, -1 };
+static int arr_argc = 0;
 
-static int h_init(void)
+module_param(myshort, short, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+MODULE_PARM_DESC(myshort, "A short integer");
+module_param(myint, int, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+MODULE_PARM_DESC(myint, "An integer");
+module_param(mylong, long, S_IRUSR);
+MODULE_PARM_DESC(mylong, "A long integer");
+module_param(mystring, charp, 0000);
+MODULE_PARM_DESC(mystring, "A character string");
+
+module_param_array(myintArray, int, &arr_argc, 0000);
+MODULE_PARM_DESC(myintArray, "An array of integers");
+
+static int _init_3(void)
 {
-    pr_info("ZCZC M03 hello03 START\n");
-    int i; 
-
-    pr_info("Hello, world 5\n=============\n"); 
-    pr_info("myshort is a short integer: %hd\n", myshort); 
-    pr_info("myint is an integer: %d\n", myint); 
-    pr_info("mylong is a long integer: %ld\n", mylong); 
-    pr_info("mystring is a string: %s\n", mystring); 
- 
-    for (i = 0; i < ARRAY_SIZE(myintarray); i++) 
-        pr_info("myintarray[%d] = %d\n", i, myintarray[i]);
- 
+    int i;
+    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
+    pr_info("%s myshort short integer: %hd\n", ZCZCHEADER, myshort);
+    pr_info("%s myint integer: %d\n", ZCZCHEADER, myint);
+    pr_info("%s mylong long integer: %ld\n", ZCZCHEADER, mylong);
+    pr_info("%s mystring string: %s\n", ZCZCHEADER, mystring);
+    for (i = 0; i < ARRAY_SIZE(myintArray); i++)
+        pr_info("ZCZC M03 myintArray[%d]: %d\n", i, myintArray[i]);
+        pr_info("%s myintArray[%d]: %d\n", ZCZCHEADER, i, myintArray[i]);
+    pr_info("%s myintArray %d argc", ZCZCHEADER, arr_argc);
     return 0;
 }
 
-void h_exit(void)
+static void _exit_3(void)
 {
     pr_info("ZCZC M03 hello03 STOP\n");
 }
 
-module_init(h_init);
-module_exit(h_exit);
-
-MODULE_LICENSE("GPL");
+module_init(_init_3);
+module_exit(_exit_3);
+MODULE_LICENSE(LICENSE);
+MODULE_AUTHOR(AUTHOR);
+MODULE_DESCRIPTION(DESCRIPTION);
