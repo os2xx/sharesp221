@@ -1,0 +1,75 @@
+REV02: Tue 26 Apr 2022 00:30:00 WIB
+REV01: Mon 25 Apr 2022 22:30:00 WIB
+START: Mon 18 Apr 2022 19:57:30 WIB
+
+* DEADLINE:
+*** WEEK08 QUIZ DEADLINE: Tue, 26-Apr-2022, 14:55
+*** WEEK08 ASSIGNMENT DEADLINE: Mon, 09-May-2022
+* Make sure you are using Linux Kernel 5.17.4+
+*** Do not forget the Linux Header
+* Go to "sharesp221/" GitHub repo folder
+* Go to your directory
+* Create a new directory: "QUIZ08/"
+
+======================================================================
+1) Copy from QUIZ07/ to QUIZ08/ files:
+   hello01.c, hello02a.c, hello02b.c, hello03.c, hello04.c, hello05.c, Makefile
+2) Fix/Update/Upgrade them
+3a) New: hello05.c
+3b) Update: Makefile
+3c) Outcome:
+3c-1) make H05ins ##### ##### ##### ##### ##### ##### ##### ##### #####
+insmod  hello05.ko
+modinfo hello05.ko
+filename:       /root/development/module/hello05.ko
+version:        REV01
+license:        GPL
+description:    hello05
+author:         C. BinKadal
+srcversion:     0DE714C3A21497AE229BFC6
+depends:        
+retpoline:      Y
+name:           hello05
+vermagic:       5.17.4-cbkadal-31 SMP preempt mod_unload 
+lsmod   | grep hello05
+hello05                16384  0
+3c-2) make H05del ##### ##### ##### ##### ##### ##### ##### ##### #####
+rmmod   hello05
+3c-3) WEEK00-KERNEL-LOG.txt # ##### ##### ##### ##### ##### ##### #####
+Apr 25 23:00:19 cbkadal kernel: [ 3851.884843] ZCZC M05 hello05 START
+Apr 25 23:00:50 cbkadal kernel: [ 3882.744301] ZCZC M05 hello05 STOP
+##### ##### ##### ##### ##### ##### ##### ##### ##### ##### ##### #####
+4a) New: hello06.c
+4b) Update: Makefile
+4c) Outcome:
+4c-1) make H06ins ##### ##### ##### ##### ##### ##### ##### ##### #####
+insmod  hello06.ko
+modinfo hello06.ko
+filename:       /root/development/module/hello06.ko
+version:        REV02
+license:        GPL
+description:    hello06
+author:         Jim Huang, modified by C. BinKadal
+srcversion:     6CC3B615F46A98DA05967FE
+depends:        
+retpoline:      Y
+name:           hello06
+vermagic:       5.17.4-cbkadal-31 SMP preempt mod_unload 
+lsmod   | grep hello06
+hello06                16384  0
+===== ===== ===== ===== =====
+cat /proc/buffer1k
+HelloWorld!
+===== ===== ===== ===== =====
+echo "XXX" > /proc/buffer1k
+===== ===== ===== ===== =====
+4c-2) make H06del ##### ##### ##### ##### ##### ##### ##### ##### #####
+rmmod   hello06
+4c-3) WEEK00-KERNEL-LOG.txt # ##### ##### ##### ##### ##### ##### #####
+Apr 26 00:45:00 cbkadal kernel: [10132.723553] ZCZC M06 hello06 START
+Apr 26 00:45:00 cbkadal kernel: [10132.723566] ZCZC M06 /proc/buffer1k created
+Apr 26 00:45:00 cbkadal kernel: [10132.752853] ZCZC M06 procfile read buffer1k
+Apr 26 00:45:00 cbkadal kernel: [10132.752924] ZCZC M06 copy_to_user failed
+Apr 26 00:45:00 cbkadal kernel: [10132.765560] ZCZC M06 procfile write XXX
+Apr 26 00:45:05 cbkadal kernel: [10137.187118] ZCZC M06 /proc/buffer1k removed
+Apr 26 00:45:05 cbkadal kernel: [10137.187158] ZCZC M06 hello06 STOP
