@@ -12,10 +12,10 @@ ifeq ($(shell id -u), 0)
 	@echo "No ROOT, please!"
 	@exit 1
 endif
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+	+make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
 clean: 
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	+make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
 
 H01ins:
 ifneq ($(shell id -u), 0)
