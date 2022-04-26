@@ -1,0 +1,20 @@
+#!/bin/bash
+# START: Tue 26 Apr 2022 15:30:00 WIB
+
+FOLDER="QUIZ08"
+
+rm -rf /tmp/$FOLDER/ /tmp/$FOLDER.tar.xz
+mkdir -pv /tmp/$FOLDER/
+for II in $(ls); do
+    [ -d $II/$FOLDER/ ] && {
+      mkdir -pv /tmp/$FOLDER/$II/
+      cp -vr $II/$FOLDER/ /tmp/$FOLDER/$II/
+    }
+done
+pushd /tmp
+tar cf $FOLDER.tar $FOLDER/
+xz $FOLDER.tar
+popd
+
+
+
