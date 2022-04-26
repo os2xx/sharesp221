@@ -76,6 +76,7 @@ static const struct file_operations proc_file_fops = {
 
 static int __init hello06_init(void)
 {
+    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
     our_proc_file = proc_create(PROCFS_NAME, 0644, NULL, &proc_file_fops);
     if (NULL == our_proc_file) {
         proc_remove(our_proc_file);
@@ -91,6 +92,7 @@ static void __exit hello06_exit(void)
 {
     proc_remove(our_proc_file);
     pr_info("%s /proc/%s removed\n", ZCZCHEADER, PROCFS_NAME);
+    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
 }
 
 module_init(hello06_init);
