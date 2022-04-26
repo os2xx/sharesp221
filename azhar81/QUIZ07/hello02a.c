@@ -4,7 +4,7 @@
 
 #define ZCZCHEADER  "ZCZC M02"
 #define DESCRIPTION "hello02"
-#define AUTHOR      "Samuel"
+#define AUTHOR      "azhar81"
 #define LICENSE     "GPL"
 
 static int __init hello02_init(void)
