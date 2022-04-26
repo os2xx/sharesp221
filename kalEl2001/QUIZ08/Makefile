@@ -4,6 +4,7 @@ hello02-objs   := hello02a.o hello02b.o
 obj-m          += hello03.o
 obj-m          += hello04.o
 obj-m          += hello05.o
+obj-m          += hello06.o
 ccflags-y      := -std=gnu18
 
 all:
@@ -79,6 +80,10 @@ endif
 	insmod  hello04.ko
 	modinfo hello04.ko
 	lsmod   | grep hello04
+	@echo "===== ===== ===== =====  ===== ===== ===== ===== ====="
+	ls -al /proc/helloworld
+	cat    /proc/helloworld
+	@echo "===== ===== ===== =====  ===== ===== ===== ===== ====="
 
 H04del:
 ifneq ($(shell id -u), 0)
@@ -102,3 +107,24 @@ ifneq ($(shell id -u), 0)
 	@exit 1
 endif
 	rmmod   hello05
+
+H06ins:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	insmod  hello06.ko
+	modinfo hello06.ko
+	lsmod   | grep hello06
+	@echo "===== ===== ===== ===== ====="
+	cat    /proc/buffer1k
+	@echo "===== ===== ===== ===== ====="
+	echo "XXX" > /proc/buffer1k
+	@echo "===== ===== ===== ===== ====="
+
+H06del:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	rmmod   hello06
