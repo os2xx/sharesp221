@@ -79,6 +79,10 @@ endif
 	insmod hello04.ko
 	modinfo hello04.ko
 	lsmod   | grep hello04
+	@echo "=================================="
+	ls -al /proc/helloworld
+	cat /proc/helloworld
+	@echo "=================================="
 
 H04del:
 ifneq ($(shell id -u),0)
