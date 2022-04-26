@@ -5,7 +5,7 @@
 // (c) 2022-2022 It is a FREE GSGS one.
 #define ZCZCHEADER  "ZCZC M01"
 #define DESCRIPTION "hello01"
-#define AUTHOR      "Samuel"
+#define AUTHOR      "azhar81"
 #define LICENSE     "GPL"
 
 #include <linux/module.h>
