@@ -47,7 +47,7 @@ static const struct file_operations proc_file_fops = {
 
 static int __init hello04_init(void)
 {
-    pr_info(prefix "hello04 START");
+    pr_info(prefix "hello04 START\n");
     our_proc_file = proc_create(procfs_name, 0644, NULL, &proc_file_fops);
     if (NULL == our_proc_file) {
         proc_remove(our_proc_file);
@@ -63,7 +63,7 @@ static void __exit hello04_exit(void)
 {
     proc_remove(our_proc_file);
     pr_info(prefix "/proc/%s removed\n", procfs_name);
-    pr_info(prefix "hello04 STOP");
+    pr_info(prefix "hello04 STOP\n");
 }
 
 module_init(hello04_init);
