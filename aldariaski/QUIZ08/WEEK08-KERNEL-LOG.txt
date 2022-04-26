@@ -1,0 +1,30 @@
+Apr 26 14:03:08 aldariaski kernel: [ 1104.617796] clocksource: timekeeping watchdog on CPU0: acpi_pm wd-wd read-back delay of 354793ns
+Apr 26 14:03:08 aldariaski kernel: [ 1104.618053] clocksource: wd-tsc-wd read-back delay of 534704ns, clock-skew test skipped!
+Apr 26 14:10:38 aldariaski kernel: [ 1555.023819] clocksource: timekeeping watchdog on CPU1: acpi_pm wd-wd read-back delay of 752609ns
+Apr 26 14:10:38 aldariaski kernel: [ 1555.025595] clocksource: wd-tsc-wd read-back delay of 1097904ns, clock-skew test skipped!
+Apr 26 14:11:24 aldariaski kernel: [ 1601.038007] clocksource: timekeeping watchdog on CPU1: acpi_pm wd-wd read-back delay of 65371ns
+Apr 26 14:11:24 aldariaski kernel: [ 1601.038612] clocksource: wd-tsc-wd read-back delay of 335238ns, clock-skew test skipped!
+Apr 26 14:14:51 aldariaski kernel: [ 1807.407172] kworker/dying (28) used greatest stack depth: 12488 bytes left
+Apr 26 14:16:13 aldariaski kernel: [ 1889.801789] hello05: loading out-of-tree module taints kernel.
+Apr 26 14:16:13 aldariaski kernel: [ 1889.804339] ZCZC M05 hello05 START
+Apr 26 14:16:27 aldariaski kernel: [ 1903.147484] ZCZC M05 hello05 STOP
+Apr 26 14:16:51 aldariaski kernel: [ 1927.208326] ZCZC M06 hello06 START
+Apr 26 14:16:51 aldariaski kernel: [ 1927.208345] ZCZC M06 hello06 /proc/buffer1k created
+Apr 26 14:16:51 aldariaski kernel: [ 1927.233020] ZCZC M06 hello06 procfile read buffer1k
+Apr 26 14:16:51 aldariaski kernel: [ 1927.233196] ZCZC M06 hello06 copy_to_user failed
+Apr 26 14:16:51 aldariaski kernel: [ 1927.242087] ZCZC M06 hello06 procfile write XXX
+Apr 26 14:16:51 aldariaski kernel: [ 1927.242087] 
+Apr 26 14:25:21 aldariaski kernel: [ 2437.497941] ZCZC M05 hello05 START
+Apr 26 14:25:28 aldariaski kernel: [ 2444.750181] ZCZC M05 hello05 STOP
+Apr 26 14:26:48 aldariaski kernel: [ 2524.230024] ZCZC M05 hello05 START
+Apr 26 14:26:57 aldariaski kernel: [ 2533.389763] ZCZC M06 hello06 /proc/buffer1k removed
+Apr 26 14:26:57 aldariaski kernel: [ 2533.389772] ZCZC M06 hello06 STOP
+Apr 26 14:27:26 aldariaski kernel: [ 2563.030292] clocksource: timekeeping watchdog on CPU1: acpi_pm retried 2 times before success
+Apr 26 14:27:33 aldariaski kernel: [ 2569.138420] ZCZC M06 hello06 START
+Apr 26 14:27:33 aldariaski kernel: [ 2569.138433] ZCZC M06 hello06 /proc/buffer1k created
+Apr 26 14:27:33 aldariaski kernel: [ 2569.158382] ZCZC M06 hello06 procfile read buffer1k
+Apr 26 14:27:33 aldariaski kernel: [ 2569.158445] ZCZC M06 hello06 copy_to_user failed
+Apr 26 14:27:33 aldariaski kernel: [ 2569.164767] ZCZC M06 hello06 procfile write XXX
+Apr 26 14:27:33 aldariaski kernel: [ 2569.164767] 
+Apr 26 14:27:39 aldariaski kernel: [ 2575.648455] ZCZC M06 hello06 /proc/buffer1k removed
+Apr 26 14:27:39 aldariaski kernel: [ 2575.648465] ZCZC M06 hello06 STOP

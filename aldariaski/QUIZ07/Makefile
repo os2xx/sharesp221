@@ -1,43 +1,90 @@
-# REV04X Tue 19 Apr 2022 01:59:03 PM WIB
-# REV04 Mon 18 Apr 2022 23:00:00 WIB
-# REV03 Sun 17 Apr 2022 17:30:00 WIB
-# REV02 Tue 05 Apr 2022 12:30:00 WIB
-# REV01 Mon 04 Apr 2022 17:00:00 WIB
-# START Sun 03 Apr 2022 11:30:00 WIB
-# 
+obj-m += hello01.o
+obj-m += hello02.o
+obj-m += hello03.o
+obj-m += hello04.o
+hello02-objs := hello02a.o hello02b.o
 
-obj-m          += hello01.o
-ccflags-y      := -std=gnu18
+PWD := $(CURDIR)
 
-all:
-ifeq ($(shell id -u), 0)
-	@echo "No ROOT, please!"
-	@exit 1
-endif
-	+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) modules
+all: 
+	@if [ "$(shell id -u)" = 0 ]; then\
+		echo "No ROOT, please!";\
+		exit 1;\
+	else\
+		make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules;\
+	fi
 
-clean:
-	+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) clean
+clean: 
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
 
-help:
-	@echo "all"
-	@echo "clean"
-	@echo "HXins"
-	@echo "HXdel"
-	@echo "help"
-
-# ZCZC 15
 H01ins:
-ifneq ($(shell id -u), 0)
-	@echo "ROOT only!"
-	@exit 1
-endif
-	insmod  hello01.ko
-	modinfo hello01.ko
-	lsmod   | grep hello01
+	@if ! [ "$(shell id -u)" = 0 ]; then\
+		echo "ROOT only!";\
+		exit 1;\
+	else\
+		insmod hello01.ko;\
+		modinfo hello01.ko;\
+		lsmod | grep hello01;\
+	fi
+
 H01del:
-ifneq ($(shell id -u), 0)
-	@echo "ROOT only!"
-	@exit 1
-endif
-	rmmod   hello01
+	@if ! [ "$(shell id -u)" = 0 ]; then\
+		echo "ROOT only!";\
+		exit 1;\
+	else\
+		rmmod hello01.ko;\
+	fi
+
+H02ins:
+	@if ! [ "$(shell id -u)" = 0 ]; then\
+		echo "ROOT only!";\
+		exit 1;\
+	else\
+		insmod hello02.ko;\
+		modinfo hello02.ko;\
+		lsmod | grep hello02;\
+	fi
+
+H02del:
+	@if ! [ "$(shell id -u)" = 0 ]; then\
+		echo "ROOT only!";\
+		exit 1;\
+	else\
+		rmmod hello02.ko;\
+	fi
+
+H03ins:
+	@if ! [ "$(shell id -u)" = 0 ]; then\
+		echo "ROOT only!";\
+		exit 1;\
+	else\
+		insmod hello03.ko;\
+		modinfo hello03.ko;\
+		lsmod | grep hello03;\
+	fi
+
+H03del:
+	@if ! [ "$(shell id -u)" = 0 ]; then\
+		echo "ROOT only!";\
+		exit 1;\
+	else\
+		rmmod hello03.ko;\
+	fi
+
+H04ins:
+	@if ! [ "$(shell id -u)" = 0 ]; then\
+		echo "ROOT only!";\
+		exit 1;\
+	else\
+		insmod hello04.ko;\
+		modinfo hello04.ko;\
+		lsmod | grep hello04;\
+	fi
+
+H04del:
+	@if ! [ "$(shell id -u)" = 0 ]; then\
+		echo "ROOT only!";\
+		exit 1;\
+	else\
+		rmmod hello04.ko;\
+	fi
