@@ -36,10 +36,10 @@ static ssize_t procfile_read(struct file *filePointer, char __user *buffer,
     ssize_t ret = len; 
  
     if (*offset >= len || copy_to_user(buffer, s, len)) { 
-        pr_info("%s %s copy_to_user failed\n", ZCZCHEADER, DESCRIPTION); 
+        pr_info("%s copy_to_user failed\n", ZCZCHEADER); 
         ret = 0; 
     } else { 
-        pr_info("%s %s procfile read %s\n", ZCZCHEADER, DESCRIPTION, filePointer->f_path.dentry->d_name.name); 
+        pr_info("%s procfile read %s\n", ZCZCHEADER, filePointer->f_path.dentry->d_name.name); 
         *offset += len; 
     } 
  
@@ -58,7 +58,7 @@ static ssize_t procfile_write(struct file *file, const char __user *buff,
         return -EFAULT; 
  
     procfs_buffer[procfs_buffer_size & (PROCFS_MAX_SIZE - 1)] = '\0'; 
-    pr_info("%s %s procfile write %s\n", ZCZCHEADER, DESCRIPTION, procfs_buffer); 
+    pr_info("%s procfile write %s\n", ZCZCHEADER, procfs_buffer); 
  
     return procfs_buffer_size; 
 } 

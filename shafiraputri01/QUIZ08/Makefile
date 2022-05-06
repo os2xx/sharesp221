@@ -111,9 +111,9 @@ endif
 	insmod  hello06.ko
 	modinfo hello06.ko
 	lsmod   | grep hello06
-	@echo "===== ===== ===== =====  ===== ===== ===== ===== ====="
+	@echo "===== ===== ===== ===== ====="
 	cat    /proc/buffer1k
-	@echo "===== ===== ===== =====  ===== ===== ===== ===== ====="
+	@echo "===== ===== ===== ===== ====="
 	echo "XXX" > /proc/buffer1k
 
 
