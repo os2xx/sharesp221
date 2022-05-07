@@ -6,6 +6,7 @@ obj-m += hello04.o
 obj-m += hello05.o
 obj-m += hello06.o
 obj-m += hello07.o
+obj-m += hello08.o
 
 EUID=$(shell id -u)
 PWD := $(CURDIR)
@@ -17,6 +18,9 @@ all: usermode
 
 clean:
 	+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) clean
+
+demo: H01ins H01del H02ins H02del H03ins H03del H04ins H04del H05ins H05del H06ins H06del H07ins H07del H08ins H08del
+
 
 H01ins: rootmode
 	insmod hello01.ko

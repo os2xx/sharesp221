@@ -11,6 +11,8 @@
 #include <linux/string.h> 
 #include <linux/sysfs.h>
 
+static struct kobject *H08module;
+
 static int hello08var = 0; 
  
 static ssize_t hello08var_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf) 
