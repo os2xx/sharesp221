@@ -10,6 +10,7 @@ EUID=$(shell id -u)
 PWD := $(CURDIR)
 
 ccflags-y := -std=gnu18
+CC=gcc
 
 all:
 ifeq ($(EUID),0)

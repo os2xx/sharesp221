@@ -17,10 +17,21 @@
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 6, 0) 
 #define HAVE_PROC_OPS 
 #endif 
- 
+
+#define PROCFS_MAX_SIZE 1024 
 #define procfs_name "buffer1k" 
  
 static struct proc_dir_entry *our_proc_file; 
+
+
+/* This structure hold information about the /proc file */
+static struct proc_dir_entry *our_proc_file;
+
+/* The buffer used to store character for this module */
+static char procfs_buffer[PROCFS_MAX_SIZE];
+
+/* The size of the buffer */
+static unsigned long procfs_buffer_size = 0;
  
 static ssize_t procfile_read(struct file *filePointer, char __user *buffer, 
                              size_t buffer_length, loff_t *offset) 
@@ -38,6 +49,23 @@ static ssize_t procfile_read(struct file *filePointer, char __user *buffer,
     } 
  
     return ret; 
+} 
+
+/* This function is called with the /proc file is written. */ 
+static ssize_t procfile_write(struct file *file, const char __user *buff, 
+                              size_t len, loff_t *off) 
+{ 
+    procfs_buffer_size = len; 
+    if (procfs_buffer_size > PROCFS_MAX_SIZE) 
+        procfs_buffer_size = PROCFS_MAX_SIZE; 
+ 
+    if (copy_from_user(procfs_buffer, buff, procfs_buffer_size)) 
+        return -EFAULT; 
+ 
+    procfs_buffer[procfs_buffer_size & (PROCFS_MAX_SIZE - 1)] = '\0'; 
+    pr_info("%s procfile write %s\n", ZCZCHEADER, procfs_buffer); 
+ 
+    return procfs_buffer_size; 
 } 
  
 #ifdef HAVE_PROC_OPS 
