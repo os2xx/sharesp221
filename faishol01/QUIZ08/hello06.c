@@ -41,10 +41,10 @@ static ssize_t procfile_read(struct file *filePointer, char __user *buffer,
     ssize_t ret = len; 
  
     if (*offset >= len || copy_to_user(buffer, s, len)) { 
-        pr_info("copy_to_user failed\n"); 
+        pr_info("%s copy_to_user failed\n", ZCZCHEADER); 
         ret = 0; 
     } else { 
-        pr_info("procfile read %s\n", filePointer->f_path.dentry->d_name.name); 
+        pr_info("%s procfile read %s\n", ZCZCHEADER, filePointer->f_path.dentry->d_name.name); 
         *offset += len; 
     } 
  
