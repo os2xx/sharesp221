@@ -120,6 +120,7 @@ static void __exit hello07_exit(void)
 {
     remove_proc_entry(PROC_NAME, NULL);
     pr_debug("%s /proc/%s removed\n", ZCZCHEADER, PROC_NAME);
+    pr_info("%s /proc/%s removed\n", ZCZCHEADER, PROC_NAME);
     pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP"); 
 }
 
