@@ -99,11 +99,11 @@ static const struct file_operations my_file_ops = {
 
 static int __init hello07_init(void)
 {
+    struct proc_dir_entry *entry;
+
     pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START"); 
 
     pr_info("%s unsigned long integer (COUNTER): %lu\n", ZCZCHEADER, counter); 
-
-    struct proc_dir_entry *entry;
 
     entry = proc_create(PROC_NAME, 0, NULL, &my_file_ops);
     if (entry == NULL) {
