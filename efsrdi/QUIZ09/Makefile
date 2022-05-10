@@ -5,6 +5,7 @@ obj-m += hello03.o
 obj-m += hello04.o
 obj-m += hello05.o
 obj-m += hello06.o
+obj-m += hello07.o
 
 PWD := $(CURDIR)
 
@@ -119,6 +120,35 @@ ifneq ($(shell id -u), 0)
 	@exit 1
 endif
 	rmmod	hello06
+
+H07ins:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	insmod hello07.ko
+	modinfo hello07.ko
+	lsmod	|	grep hello07
+	@echo "===== ===== ===== ===== ====="
+	cat /proc/ITER
+	cat /proc/ITER
+	cat /proc/ITER
+	@echo "===== ===== ===== ===== ====="
+	rmmod	hello07
+	insmod 	hello07.ko counter=10
+	lsmod | grep hello07
+	@echo "===== ===== ===== ===== ====="
+	cat /proc/ITER
+	cat /proc/ITER
+	cat /proc/ITER
+	@echo "===== ===== ===== ===== ====="
+
+H07del:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
+	rmmod	hello07
 
 clean:
 	+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) clean
