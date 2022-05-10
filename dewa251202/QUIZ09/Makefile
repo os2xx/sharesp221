@@ -5,6 +5,7 @@ obj-m += hello04.o
 obj-m += hello05.o
 obj-m += hello06.o
 obj-m += hello07.o
+obj-m += hello08.o
 hello02-objs := hello02a.o hello02b.o
 
 PWD := $(CURDIR)
@@ -106,6 +107,19 @@ H07ins: rootmode
 
 H07del: rootmode
 	rmmod  hello07.ko
+
+H08ins: rootmode
+	insmod  hello08.ko
+	modinfo hello08.ko
+	lsmod   | grep hello08
+	@echo "===== ===== ===== ===== ====="
+	cat         /sys/kernel/H08module/hello08var
+	echo "99" > /sys/kernel/H08module/hello08var
+	cat         /sys/kernel/H08module/hello08var
+	@echo "===== ===== ===== ===== ====="
+
+H08del: rootmode
+	rmmod  hello08.ko
 
 usermode:
 ifeq ($(shell id -u), 0)
