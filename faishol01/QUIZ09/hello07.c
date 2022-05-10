@@ -3,10 +3,12 @@
 #include <linux/proc_fs.h> 
 #include <linux/uaccess.h> 
 #include <linux/version.h> 
+#include <linux/moduleparam.h> 
+#include <linux/seq_file.h>
 
 #define ZCZCHEADER  "ZCZC M07"
 #define DESCRIPTION "hello07"
-#define AUTHOR      "faishol01"
+#define AUTHOR      "Jim Huang, modified by faishol01"
 #define LICENSE     "GPL"
 #define VERSION     "REV00"
 
@@ -15,10 +17,56 @@
 #define HAVE_PROC_OPS 
 #endif 
 
-#define PROCFS_MAX_SIZE 1024 
-#define procfs_name "ITER" 
+#define PROC_NAME "ITER" 
+
+static unsigned long counter = 0; 
+module_param(counter, ulong, S_IRUSR); 
+MODULE_PARM_DESC(counter, "UnsignedLongInteger"); 
 
 
+static void *my_seq_start(struct seq_file *s, loff_t *pos) 
+{ 
+    if (*pos == 0) { 
+        return &counter; 
+    } 
+ 
+    *pos = 0; 
+    return NULL; 
+} 
+
+static void *my_seq_next(struct seq_file *s, void *v, loff_t *pos)
+{
+    unsigned long *tmp_v = (unsigned long *)v;
+    (*tmp_v)++;
+    (*pos)++;
+    return NULL;
+}
+
+static void my_seq_stop(struct seq_file *s, void *v)
+{
+    /* nothing to do, we use a static value in start() */
+}
+
+static int my_seq_show(struct seq_file *s, void *v)
+{
+    loff_t *spos = (loff_t *)v;
+
+    seq_printf(s, "%Ld\n", *spos);
+    pr_info("%s ITER COUNTER=%lu\n", ZCZCHEADER, counter);
+    return 0;
+}
+
+static struct seq_operations my_seq_ops = {
+    .start = my_seq_start,
+    .next = my_seq_next,
+    .stop = my_seq_stop,
+    .show = my_seq_show,
+};
+
+static int my_open(struct inode *inode, struct file *file)
+{
+    return seq_open(file, &my_seq_ops);
+};
 
 #ifdef HAVE_PROC_OPS 
 static const struct proc_ops my_file_ops = { 
@@ -56,7 +104,7 @@ static int __init hello07_init(void)
 static void __exit hello07_exit(void) 
 { 
     remove_proc_entry(PROC_NAME, NULL); 
-    pr_debug("%s /proc/%s removed\n", ZCZCHEADER, PROC_NAME);
+    pr_info("%s /proc/%s removed\n", ZCZCHEADER, PROC_NAME);
     pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
 } 
 

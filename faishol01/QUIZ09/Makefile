@@ -5,6 +5,7 @@ obj-m += hello03.o
 obj-m += hello04.o
 obj-m += hello05.o
 obj-m += hello06.o
+obj-m += hello07.o
 
 EUID=$(shell id -u)
 PWD := $(CURDIR)
@@ -12,7 +13,7 @@ PWD := $(CURDIR)
 ccflags-y := -std=gnu18
 
 all: usermode
-	+make -C /lib/modules/$(shell uname -r)/build CC=$(CC) M=$(PWD) modules
+	+make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
 clean:
 	+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) clean
