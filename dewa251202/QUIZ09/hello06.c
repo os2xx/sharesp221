@@ -97,5 +97,7 @@ static void __exit hello06_exit(void)
 module_init(hello06_init);
 module_exit(hello06_exit);
 
-MODULE_AUTHOR("linD026, modified by dewa251202");
+MODULE_AUTHOR("LKMPG team, modified by dewa251202");
 MODULE_LICENSE("GPL");
+MODULE_VERSION("REV02");
+MODULE_DESCRIPTION("hello06");

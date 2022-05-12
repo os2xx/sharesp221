@@ -16,4 +16,6 @@ static int __init init_hello02(void)
 module_init(init_hello02);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("dewa251202");
+MODULE_AUTHOR("LKMPG team, modified by dewa251202");
+MODULE_VERSION("REV02");
+MODULE_DESCRIPTION("hello02");

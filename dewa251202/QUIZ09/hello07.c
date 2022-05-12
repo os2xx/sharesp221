@@ -18,7 +18,7 @@
 
 static unsigned long counter = 0;
 module_param(counter, ulong, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-MODULE_PARM_DESC(counter, "An unsigned long integer");
+MODULE_PARM_DESC(counter, "UnsignedLongInteger");
 
 /* This function is called at the beginning of a sequence.
  * ie, when:
@@ -127,5 +127,7 @@ static void __exit hello07_exit(void)
 module_init(hello07_init);
 module_exit(hello07_exit);
 
-MODULE_AUTHOR("jserv, modified by dewa251202");
+MODULE_AUTHOR("LKMPG team, modified by dewa251202");
 MODULE_LICENSE("GPL");
+MODULE_VERSION("REV03");
+MODULE_DESCRIPTION("hello07");

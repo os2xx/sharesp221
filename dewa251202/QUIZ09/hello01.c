@@ -19,4 +19,6 @@ void cleanup_module(void)
 } 
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("dewa251202");
+MODULE_AUTHOR("LKMPG team, modified by dewa251202");
+MODULE_VERSION("REV02");
+MODULE_DESCRIPTION("hello01");

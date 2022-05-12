@@ -64,5 +64,7 @@ static void __exit H08module_exit(void)
 module_init(H08module_init);
 module_exit(H08module_exit);
 
-MODULE_AUTHOR("jserv, modified by dewa251202");
+MODULE_AUTHOR("LKMPG team, modified by dewa251202");
 MODULE_LICENSE("GPL");
+MODULE_VERSION("REV02");
+MODULE_DESCRIPTION("hello08");

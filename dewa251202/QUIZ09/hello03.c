@@ -7,9 +7,11 @@
 #include <linux/moduleparam.h> 
 #include <linux/stat.h> 
 
-MODULE_AUTHOR("dewa251202");
+MODULE_AUTHOR("LKMPG team, modified by dewa251202");
 MODULE_LICENSE("GPL"); 
- 
+MODULE_VERSION("REV02");
+MODULE_DESCRIPTION("hello03");
+
 static short int myshort = 1; 
 static int myint = 1234; 
 static long int mylong = 567890; 
