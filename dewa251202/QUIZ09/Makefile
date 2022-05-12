@@ -80,13 +80,6 @@ H06ins: rootmode
 H06del: rootmode
 	rmmod  hello06.ko
 
-# === MODE CHECKER === #
-rootmode:
-ifneq ($(shell id -u), 0)
-	@echo "ROOT only!"
-	@exit 1
-endif
-
 H07ins: rootmode
 	insmod  hello07.ko
 	modinfo hello07.ko
@@ -120,6 +113,13 @@ H08ins: rootmode
 
 H08del: rootmode
 	rmmod  hello08.ko
+
+# === MODE CHECKER === #
+rootmode:
+ifneq ($(shell id -u), 0)
+	@echo "ROOT only!"
+	@exit 1
+endif
 
 usermode:
 ifeq ($(shell id -u), 0)

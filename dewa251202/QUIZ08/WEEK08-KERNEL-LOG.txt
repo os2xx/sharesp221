@@ -1,9 +1,0 @@
-Apr 26 14:16:10 dewa251202 kernel: [  153.594061] ZCZC M05 hello05 START
-Apr 26 14:16:15 dewa251202 kernel: [  158.131592] ZCZC M05 hello05 STOP
-Apr 26 14:16:52 dewa251202 kernel: [  195.259464] ZCZC M06 hello06 START
-Apr 26 14:16:52 dewa251202 kernel: [  195.259470] ZCZC M06 /proc/buffer1k created
-Apr 26 14:16:52 dewa251202 kernel: [  195.265223] ZCZC M06 procfile read buffer1k
-Apr 26 14:16:52 dewa251202 kernel: [  195.265240] ZCZC M06 copy_to_user failed
-Apr 26 14:16:52 dewa251202 kernel: [  195.266137] ZCZC M06 procfile write XXX
-Apr 26 14:17:08 dewa251202 kernel: [  211.953951] ZCZC M06 /proc/buffer1k removed
-Apr 26 14:17:08 dewa251202 kernel: [  211.953955] ZCZC M06 hello06 STOP
