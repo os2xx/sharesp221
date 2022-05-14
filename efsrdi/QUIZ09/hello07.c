@@ -1,5 +1,8 @@
+#define VERSION     "REV02"
 #define ZCZCHEADER  "ZCZC M07"
 #define DESCRIPTION "hello07"
+#define AUTHOR      "Jim Huang, modified by efsrdi"
+#define LICENSE     "GPL"
 
 #include <linux/kernel.h> /* We are doing kernel work */ 
 #include <linux/module.h> /* Specifically, a module */ 
@@ -96,7 +99,7 @@ static const struct file_operations my_file_ops = {
 }; 
 #endif 
  
-static int __init procfs4_init(void) 
+static int __init hello_7_init(void) 
 { 
     struct proc_dir_entry *entry; 
     pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
@@ -108,17 +111,21 @@ static int __init procfs4_init(void)
     } 
     
     pr_info("%s /proc/%s created\n", ZCZCHEADER, PROC_NAME);
+    pr_info("%s unsigned long integer (COUNTER): %ld\n", ZCZCHEADER, counter);
     return 0; 
 } 
  
-static void __exit procfs4_exit(void) 
+static void __exit hello_7_exit(void) 
 { 
     remove_proc_entry(PROC_NAME, NULL); 
     pr_info("%s /proc/%s removed\n", ZCZCHEADER, PROC_NAME); 
     pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
 } 
  
-module_init(procfs4_init); 
-module_exit(procfs4_exit); 
+module_init(hello_7_init); 
+module_exit(hello_7_exit); 
  
-MODULE_LICENSE("GPL");
+MODULE_AUTHOR(AUTHOR);
+MODULE_DESCRIPTION(DESCRIPTION);
+MODULE_LICENSE(LICENSE);
+MODULE_VERSION(VERSION);

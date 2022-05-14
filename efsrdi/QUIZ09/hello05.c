@@ -1,5 +1,8 @@
+#define VERSION     "REV02"
 #define ZCZCHEADER  "ZCZC M05"
 #define DESCRIPTION "hello05"
+#define AUTHOR      "efsrdi"
+#define LICENSE     "GPL"
 
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -16,4 +19,8 @@ static void __exit hello_5_exit(void) {
 
 module_init(hello_5_init);
 module_exit(hello_5_exit);
-MODULE_LICENSE("GPL");
+
+MODULE_AUTHOR(AUTHOR);
+MODULE_DESCRIPTION(DESCRIPTION);
+MODULE_LICENSE(LICENSE);
+MODULE_VERSION(VERSION);

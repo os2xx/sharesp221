@@ -1,5 +1,8 @@
+#define VERSION     "REV02"
 #define ZCZCHEADER  "ZCZC M06"
 #define DESCRIPTION "hello06"
+#define AUTHOR      "Jim Huang, modified by efsrdi"
+#define LICENSE     "GPL"
 
 #include <linux/kernel.h> /* We're doing kernel work */ 
 #include <linux/module.h> /* Specifically, a module */ 
@@ -95,4 +98,7 @@ static void __exit hello_6_exit(void)
 module_init(hello_6_init); 
 module_exit(hello_6_exit); 
  
-MODULE_LICENSE("GPL");
+MODULE_AUTHOR(AUTHOR);
+MODULE_DESCRIPTION(DESCRIPTION);
+MODULE_LICENSE(LICENSE);
+MODULE_VERSION(VERSION);

@@ -1,5 +1,8 @@
+#define VERSION     "REV02"
 #define ZCZCHEADER  "ZCZC M04"
 #define DESCRIPTION "hello04"
+#define AUTHOR      "Jim Huang, modified by efsrdi"
+#define LICENSE     "GPL"
 
 #include <linux/kernel.h>	/* Doing kernel work */
 #include <linux/module.h>	/* Specificially, a module */
@@ -23,10 +26,10 @@ static ssize_t procfile_read(struct file *filePointer, char __user *buffer,
 	ssize_t ret = len;
 
 	if (*offset >= len || copy_to_user(buffer, s, len)) { 
-        	pr_info("copy_to_user failed\n"); 
+        	pr_info("%s copy_to_user failed\n", ZCZCHEADER); 
         	ret = 0;
 	} else {
-		pr_info("procfile read %s\n", filePointer->f_path.dentry->d_name.name);
+		pr_info("%s procfile read %s\n", ZCZCHEADER, filePointer->f_path.dentry->d_name.name);
 		*offset += len;
 	}
 
@@ -66,4 +69,7 @@ static void __exit hello_4_exit(void) {
 module_init(hello_4_init);
 module_exit(hello_4_exit);
 
-MODULE_LICENSE("GPL");
+MODULE_AUTHOR(AUTHOR);
+MODULE_DESCRIPTION(DESCRIPTION);
+MODULE_LICENSE(LICENSE);
+MODULE_VERSION(VERSION);

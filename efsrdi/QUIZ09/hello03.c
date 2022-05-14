@@ -1,5 +1,8 @@
+#define VERSION     "REV02"
 #define ZCZCHEADER  "ZCZC M03"
 #define DESCRIPTION "hello03"
+#define AUTHOR      "efsrdi"
+#define LICENSE     "GPL"
 
 #include <linux/init.h> 
 #include <linux/kernel.h> 
@@ -50,4 +53,7 @@ static void __exit hello_3_exit(void)
 
 module_init(hello_3_init);
 module_exit(hello_3_exit);
-MODULE_LICENSE("GPL");
+MODULE_AUTHOR(AUTHOR);
+MODULE_DESCRIPTION(DESCRIPTION);
+MODULE_LICENSE(LICENSE);
+MODULE_VERSION(VERSION);

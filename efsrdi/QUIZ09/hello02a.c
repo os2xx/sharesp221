@@ -1,5 +1,8 @@
+#define VERSION     "REV02"
 #define ZCZCHEADER  "ZCZC M02"
 #define DESCRIPTION "hello02"
+#define AUTHOR      "efsrdi"
+#define LICENSE     "GPL"
 
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -11,4 +14,7 @@ static int __init hello_2_init(void) {
 }
 
 module_init(hello_2_init);
-MODULE_LICENSE("GPL");
+MODULE_AUTHOR(AUTHOR);
+MODULE_DESCRIPTION(DESCRIPTION);
+MODULE_LICENSE(LICENSE);
+MODULE_VERSION(VERSION);
