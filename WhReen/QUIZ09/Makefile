@@ -98,6 +98,10 @@ endif
 	insmod hello04.ko
 	modinfo hello04.ko
 	lsmod   | grep hello04
+	@echo $(border)
+	ls -al /proc/helloworld
+	cat    /proc/helloworld
+	@echo $(border)
 
 H04del:
 ifneq ($(EUID),0)
@@ -132,6 +136,7 @@ endif
 	lsmod   | grep hello06
 	@echo $(border)
 	cat /proc/buffer1k
+	@echo $(border)
 	echo "Hello!" > /proc/buffer1k
 
 H06del:
@@ -145,27 +150,30 @@ endif
 
 H07ins:
 ifneq ($(EUID),0)
-        @echo "ROOT only!"
-        @exit 1
+	@echo "ROOT only!"
+	@exit 1
 endif
 	insmod hello07.ko
 	modinfo hello07.ko
 	lsmod   | grep hello07
+	@echo $(border)
 	cat /proc/ITER
 	cat /proc/ITER
 	cat /proc/ITER
+	@echo $(border)
 	rmmod hello07
 	insmod hello07.ko counter=10
 	modinfo hello07.ko
 	lsmod   | grep hello07
+	@echo $(border)
 	cat /proc/ITER
 	cat /proc/ITER
 	cat /proc/ITER
 
 H07del:
 ifneq ($(EUID),0)
-        @echo "ROOT only!"
-        @exit 1
+	@echo "ROOT only!"
+	@exit 1
 endif
 	rmmod hello07
 
@@ -177,9 +185,11 @@ endif
 	insmod hello08.ko
 	modinfo hello08.ko
 	lsmod   | grep hello08
+	@echo $(border)
 	cat         /sys/kernel/H08module/hello08var
 	echo "99" > /sys/kernel/H08module/hello08var
 	cat         /sys/kernel/H08module/hello08var
+	@echo $(border)
 
 H08del:
 ifneq ($(EUID),0)

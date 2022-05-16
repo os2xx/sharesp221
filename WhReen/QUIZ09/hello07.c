@@ -3,6 +3,7 @@
 #include <linux/proc_fs.h> /* Necessary because we use the proc fs */
 #include <linux/seq_file.h> /* for seq_file */
 #include <linux/version.h>
+#include <linux/moduleparam.h> /* for parameter? */
 
 #define ZCZCHEADER  "ZCZC M07"
 #define DESCRIPTION "hello07"
@@ -15,6 +16,15 @@
 
 #define PROC_NAME "ITER"
 
+static unsigned long counter = 0;
+/* beginning a new sequence? for my_seq_start */
+module_param(counter, ulong, S_IRUGO);
+MODULE_PARM_DESC(counter, "Static Unsigned Long var");
+/* make counter to be an inputable parameter */
+
+struct proc_dir_entry *entry;
+/* formerly in init function */
+
 /* This function is called at the beginning of a sequence.
  * ie, when:
  *   - the /proc file is read (first time)
@@ -24,8 +34,6 @@
 static void *my_seq_start(struct seq_file *s, loff_t *pos)
 
 {
-    static unsigned long counter = 0;
-    /* beginning a new sequence? */
 
     if (*pos == 0) {
         /* yes => return a non null value to begin the sequence */
@@ -67,6 +75,7 @@ static int my_seq_show(struct seq_file *s, void *v)
     loff_t *spos = (loff_t *)v;
 
     seq_printf(s, "%Ld\n", *spos);
+	pr_info("%s ITER COUNTER=%lu\n", ZCZCHEADER, counter);
     return 0;
 }
 
@@ -114,7 +123,6 @@ static const struct file_operations my_file_ops = {
 static int _init_7(void)
 {
     pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
-    struct proc_dir_entry *entry;
 
     entry = proc_create(PROC_NAME, 0, NULL, &my_file_ops);
 
