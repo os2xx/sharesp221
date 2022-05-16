@@ -19,7 +19,7 @@ static int hello08var = 0;
 static ssize_t hello08var_show(struct kobject *kobj, 
                                struct kobj_attribute *attr, char *buf) 
 { 
-    pr_info("%s %s %s = %d\n", ZCZCHEADER, DESCRIPTION, VAR, hello08var);
+    pr_info("%s %s = %d\n", ZCZCHEADER, VAR, hello08var);
     return sprintf(buf, "%d\n", hello08var); 
 } 
 
@@ -50,7 +50,7 @@ static int __init hello_8_init(void)
                 "in /sys/kernel/H08module\n"); 
     } 
     
-    pr_info("%s %s %s %s\n", ZCZCHEADER, DESCRIPTION, VAR, "[OK]");
+    pr_info("%s %s %s\n", ZCZCHEADER, VAR, "[OK]");
     return error; 
 }
 
