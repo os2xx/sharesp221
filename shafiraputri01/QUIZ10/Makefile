@@ -7,9 +7,15 @@ obj-m += hello05.o
 obj-m += hello06.o
 obj-m += hello07.o
 obj-m += hello08.o
+obj-m += hello09.o
+hello09-objs := fs.o super.o inode.o file.o dir.o extent.o
 ccflags-y      := -std=gnu18
  
-PWD := $(CURDIR) 
+PWD := $(CURDIR)
+
+KDIR ?= /lib/modules/$(shell uname -r)/build
+
+MKFS = mkfs.simplefs
  
 all:usermode
 	+make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules 
