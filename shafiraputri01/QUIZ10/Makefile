@@ -120,6 +120,15 @@ H08ins:rootmode
 H08del:rootmode
 	rmmod   hello08
 
+H09ins:rootmode
+	insmod  simplefs.ko
+	modinfo simplefs.ko
+	lsmod   | grep simplefs
+	bash ./h09-test.sh
+H09del:rootmode
+	rmmod   hello09
+
+
 rootmode:
 ifneq ($(shell id -u), 0)
 	@echo "ROOT only!"

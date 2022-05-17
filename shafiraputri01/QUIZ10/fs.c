@@ -4,7 +4,7 @@
 #define ZCZCHEADER  "ZCZC M09"
 #define DESCRIPTION "A simple file system"
 #define AUTHOR      "National Cheng Kung University, Taiwan, editted by shafiraputri01"
-#define LICENSE     ""Dual BSD/GPL"
+#define LICENSE     "Dual BSD/GPL"
 
 #define pr_fmt(fmt) ZCZCHEADER " " KBUILD_MODNAME ": " fmt
 
