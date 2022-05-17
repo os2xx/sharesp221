@@ -10,14 +10,14 @@
 #define AUTHOR      "shafiraputri01"
 #define LICENSE     "GPL"
 
-#define pr_fmt(fmt) ZCZCHEADER KBUILD_MODNAME ": " fmt
+#define pr_fmt(fmt) ZCZCHEADER " " KBUILD_MODNAME ": " fmt
 
 #include <linux/kernel.h> /* Needed for pr_info() */ 
 #include <linux/module.h> /* Needed by all modules */ 
  
 int init_module(void) 
 { 
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
+    pr_info("%s - %s\n", DESCRIPTION, "START");
  
     /* A non 0 return means init_module failed; module can't be loaded. */ 
     return 0; 
@@ -25,7 +25,7 @@ int init_module(void)
  
 void cleanup_module(void) 
 { 
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
+    pr_info("%s - %s\n", DESCRIPTION, "STOP");
 } 
  
 MODULE_AUTHOR(AUTHOR);

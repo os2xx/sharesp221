@@ -10,7 +10,7 @@
 #define AUTHOR      "shafiraputri01"
 #define LICENSE     "GPL"
 
-#define pr_fmt(fmt) ZCZCHEADER KBUILD_MODNAME ": " fmt
+#define pr_fmt(fmt) ZCZCHEADER " " KBUILD_MODNAME ": " fmt
 
 #include <linux/init.h> 
 #include <linux/kernel.h> 
@@ -28,7 +28,7 @@ static int hello08var = 0;
 static ssize_t hello08var_show(struct kobject *kobj, 
                                struct kobj_attribute *attr, char *buf) 
 { 
-    pr_info("%s /sys/kernel/H08module/hello08var = %d\n", ZCZCHEADER, hello08var);
+    pr_info("/sys/kernel/H08module/hello08var = %d\n", hello08var);
     return sprintf(buf, "%d\n", hello08var); 
 } 
  
@@ -47,7 +47,7 @@ static int __init hello08_init(void)
 { 
     int error = 0;
         
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
+    pr_info("%s - %s\n", DESCRIPTION, "START");
 
     mymodule = kobject_create_and_add("H08module", kernel_kobj); 
     if (!mymodule) 
@@ -59,14 +59,14 @@ static int __init hello08_init(void)
                 "in /sys/kernel/H08module\n"); 
     }
 
-    pr_info("%s /sys/kernel/H08module/hello08var [OK]\n", ZCZCHEADER);
+    pr_info("/sys/kernel/H08module/hello08var [OK]\n");
     return error; 
 } 
  
 static void __exit hello08_exit(void) 
 { 
     kobject_put(mymodule); 
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
+    pr_info("%s - %s\n", DESCRIPTION, "STOP");
 } 
  
 module_init(hello08_init); 
@@ -76,4 +76,3 @@ MODULE_AUTHOR(AUTHOR);
 MODULE_DESCRIPTION(DESCRIPTION);
 MODULE_LICENSE(LICENSE);
 MODULE_VERSION(VERSION);
-
