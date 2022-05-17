@@ -33,7 +33,7 @@ static int simplefs_readdir(struct file *filp, void *dirent, filldir_t filldir)
     sfs_inode = inode->i_private;
 
     if (unlikely(!S_ISDIR(sfs_inode->mode))) {
-        printk(KERN_ERR "inode %u not a directory", sfs_inode->inode_no);
+        printk(KERN_ERR "inode %llu not a directory", sfs_inode->inode_no);
         return -ENOTDIR;
     }
 
@@ -69,36 +69,28 @@ static struct inode_operations simplefs_inode_ops = {
 };
 
 
-
-struct inode *simplefs_get_inode(struct super_block *sb,
-				 const struct inode *dir, umode_t mode,
-				 dev_t dev)
+struct simplefs_inode * simplefs_get_inode(struct super_block *sb, uint64_t inode_no)
 {
-    struct inode *inode = new_inode(sb);
+    struct simplefs_super_block *sfs_sb = SIMPLEFS_SB(sb);
+    struct simplefs_inode *sfs_inode = NULL;
 
-    if (inode) {
-        inode->i_ino = get_next_ino();
-        inode_init_owner(inode, dir, mode);
+    int i;
+    struct buffer_head *bh;
 
-        inode->i_atime = inode->i_mtime = inode->i_ctime = CURRENT_TIME;
+    /* The inode store can be read once and kept in memory permanently while mounting.
+     * But such a model will not be scalable in a filesystem with
+     * millions or billions of files (inodes) */
+    bh = (struct buffer_head *)sb_bread(sb, SIMPLEFS_INODESTORE_BLOCK_NUMBER);
+    sfs_inode = (struct simplefs_inode *) bh->b_data;
 
-        switch (mode & S_IFMT) {
-        case S_IFDIR:
-            /* i_nlink will be initialized to 1 in the inode_init_always function
-             * (that gets called inside the new_inode function),
-             * We change it to 2 for directories, for covering the "." entry */
-            inc_nlink(inode);
-            break;
-        case S_IFREG:
-        case S_IFLNK:
-        default:
-            printk(KERN_ERR
-                "simplefs can create meaningful inode for only root directory at the moment\n");
-            return NULL;
-            break;
+    for (i=0;i < sfs_sb->inodes_count; i++) {
+        if (sfs_inode->inode_no == inode_no) {
+            /* FIXME: bh->b_data is probably leaking */
+            return sfs_inode;
         }
+        sfs_inode++;
     }
-    return inode;
+    return NULL;
 }
 
 int simplefs_fill_super(struct super_block *sb, void *data, int silent)
@@ -107,11 +99,12 @@ int simplefs_fill_super(struct super_block *sb, void *data, int silent)
     struct buffer_head *bh;
     struct simplefs_super_block *sb_disk;
 
-    bh = (struct buffer_head *)sb_bread(sb, 0);
+    bh = (struct buffer_head *)sb_bread(sb, SIMPLEFS_SUPERBLOCK_BLOCK_NUMBER);
 
     sb_disk = (struct simplefs_super_block *)bh->b_data;
+    /* FIXME: bh->b_data is probably leaking */
 
-    printk(KERN_INFO "The magic number obtained in disk is: [%d]\n",
+    printk(KERN_INFO "The magic number obtained in disk is: [%llu]\n",
            sb_disk->magic);
 
     if (unlikely(sb_disk->magic != SIMPLEFS_MAGIC)) {
@@ -127,7 +120,7 @@ int simplefs_fill_super(struct super_block *sb, void *data, int silent)
     }
 
     printk(KERN_INFO
-           "simplefs filesystem of version [%d] formatted with a block size of [%d] detected in the device.\n",
+           "simplefs filesystem of version [%llu] formatted with a block size of [%llu] detected in the device.\n",
            sb_disk->version, sb_disk->block_size);
 
 
@@ -137,14 +130,14 @@ int simplefs_fill_super(struct super_block *sb, void *data, int silent)
     sb->s_fs_info = sb_disk;
 
     root_inode = new_inode(sb);
-    root_inode->i_ino = SIMPLEFS_ROOT_INODE_NUMBER;
+    root_inode->i_ino = SIMPLEFS_ROOTDIR_INODE_NUMBER;
     inode_init_owner(root_inode, NULL, S_IFDIR);
     root_inode->i_sb = sb;
     root_inode->i_op = &simplefs_inode_ops;
     root_inode->i_fop = &simplefs_dir_operations;
     root_inode->i_atime = root_inode->i_mtime = root_inode->i_ctime = CURRENT_TIME;
 
-    root_inode->i_private = &(sb_disk->root_inode);
+    root_inode->i_private = simplefs_get_inode(sb, SIMPLEFS_ROOTDIR_INODE_NUMBER);
 
     sb->s_root = d_make_root(root_inode);
 
