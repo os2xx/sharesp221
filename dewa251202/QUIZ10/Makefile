@@ -1,3 +1,5 @@
+# REV??: 17/05/2022 13:33:00
+
 obj-m += hello01.o
 obj-m += hello02.o
 obj-m += hello03.o
@@ -6,6 +8,7 @@ obj-m += hello05.o
 obj-m += hello06.o
 obj-m += hello07.o
 obj-m += hello08.o
+obj-m += hello09.o
 hello02-objs := hello02a.o hello02b.o
 
 PWD := $(CURDIR)
@@ -113,6 +116,14 @@ H08ins: rootmode
 
 H08del: rootmode
 	rmmod  hello08.ko
+
+H09ins: rootmode
+	insmod  hello09.ko
+	modinfo hello09.ko
+	lsmod   | grep hello09
+
+H09del: rootmode
+	rmmod  hello09.ko
 
 # === MODE CHECKER === #
 rootmode:
