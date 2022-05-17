@@ -7,6 +7,7 @@ obj-m          += hello05.o
 obj-m          += hello06.o
 obj-m          += hello07.o
 obj-m          += hello08.o
+obj-m	       += simplefs.o
 ccflags-y      := -std=gnu18
 
 all: usermode
@@ -107,6 +108,16 @@ H08del: rootmode
 	rmmod 	hello08
 
 .PHONY: clean help rootmode usermode
+
+H09ins: rootmode
+	insmod	simplefs.ko
+	modinfo	simplefs.ko
+	lsmod   | grep simplefs
+	bash ./h09-test.sh
+	@echo "ZCZC MKDIR mkdir: create directory 'testfs/'"	
+
+H09del:	rootmode
+	rmmod	simplefs
 
 clean: usermode
 	+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) clean
