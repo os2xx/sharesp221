@@ -1,34 +1,46 @@
 /*
- * hello05.c
+ * hello09.c
  */
-#define VERSION     "REV02"
-// REV02: Tue 17 May 2022 14:50:00 WIB
-// REV01: Tue 10 May 2022 14:50:00 WIB
+#define VERSION     "START"
+// START: Tue 17 May 2022 14:50:00 WIB
 // (c) 2022-2022 It is a FREE GSGS one.
-#define ZCZCHEADER  "ZCZC M05"
-#define DESCRIPTION "A module with init_module()/clean_module()"
+#define ZCZCHEADER  "ZCZC M09"
+#define DESCRIPTION "A simple file system"
 #define AUTHOR      "shafiraputri01"
 #define LICENSE     "GPL"
 
 #define pr_fmt(fmt) ZCZCHEADER KBUILD_MODNAME ": " fmt
 
+#include <linux/fs.h> 
 #include <linux/init.h> 
+#include <linux/kobject.h> 
 #include <linux/kernel.h> 
 #include <linux/module.h> 
+#include <linux/string.h> 
+#include <linux/sysfs.h> 
 
-static int _init_5(void) 
+static struct kobject *mymodule; 
+
+static int _init_9(void) 
 { 
     pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
+
+    mymodule = kobject_create_and_add("mymodule", kernel_kobj); 
+    if (!mymodule) 
+        return -ENOMEM; 
+ 
+    pr_info("%s %s\n", ZCZCHEADER, "Module loaded");
+
     return 0; 
 } 
  
-static void _exit_5(void) 
+static void _exit_9(void) 
 { 
     pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
 } 
  
-module_init(_init_5); 
-module_exit(_exit_5); 
+module_init(_init_9); 
+module_exit(_exit_9); 
 
 MODULE_AUTHOR(AUTHOR);
 MODULE_DESCRIPTION(DESCRIPTION);

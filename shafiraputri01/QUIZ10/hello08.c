@@ -6,7 +6,7 @@
 // START: Tue 10 May 2022 14:50:00 WIB
 // (c) 2022-2022 It is a FREE GSGS one.
 #define ZCZCHEADER  "ZCZC M08"
-#define DESCRIPTION "A module with init_module()/clean_module()"
+#define DESCRIPTION "/sys/ the sysfs"
 #define AUTHOR      "shafiraputri01"
 #define LICENSE     "GPL"
 
