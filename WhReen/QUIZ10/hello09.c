@@ -13,8 +13,20 @@
 #include <linux/module.h> /* Needed by all modules */
 #include <linux/init.h>
 
+
+
+
 static int __init hello09_start(void)
 {
+    int ret;
+
+    ret = register_filesystem(&simplefs_fs_type);
+    if (likely(ret == 0))
+        printk(KERN_INFO "Sucessfully registered simplefs\n");
+    else
+        printk(KERN_ERR "Failed to register simplefs. Error:[%d]", ret);
+
+    return ret;
     pr_info("%s - %s\n", DESCRIPTION, "START");
     /* A non 0 return means init_module failed; module can't be loaded. */
     return 0;
@@ -22,6 +34,16 @@ static int __init hello09_start(void)
 
 static void __exit hello09_end(void)
 {
+    int ret;
+
+    ret = unregister_filesystem(&simplefs_fs_type);
+
+    if (likely(ret == 0))
+        printk(KERN_INFO "Sucessfully unregistered simplefs\n");
+    else
+        printk(KERN_ERR "Failed to unregister simplefs. Error:[%d]",
+               ret);
+
     pr_info("%s - %s\n", DESCRIPTION, "STOP");
 }
 
