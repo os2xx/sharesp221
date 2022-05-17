@@ -39,12 +39,12 @@ MODULE_PARM_DESC(myintArray, "Array[int]");
 static int h_init(void)
 {
     int i;
-    pr_info(%s - %s\n", DESCRIPTION, "START");
+    pr_info("%s - %s\n", DESCRIPTION, "START");
 
     pr_info("myshort short integer: %hd\n", myshort);
     pr_info("myint integer: %d\n", myint);
     pr_info("mylong long integer: %ld\n", mylong);
-    pr_info("mystring: %s\n",, mystring);
+    pr_info("mystring: %s\n", mystring);
 
     for (i = 0; i < ARRAY_SIZE(myintArray); i++) 
         if (arr_argc != 0)

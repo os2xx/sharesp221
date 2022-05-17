@@ -16,8 +16,8 @@ KDIR           ?= /lib/modules/$(shell uname -r)/build
 MKFS            = mkfs.simplefs
 CC              = gcc
 
-all: usermode
-	+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) modules
+all:    $(MKFS) usermode
+	+make -C $(KDIR) M=$(PWD) modules
 
 H01ins: rootmode
 	insmod  hello01.ko
@@ -112,6 +112,8 @@ H08ins: rootmode
 
 H08del: rootmode
 	rmmod 	hello08
+$(MKFS): h09-mkfs.c usermode
+	$(CC) -Wall -o $@ $<
 
 .PHONY: clean help rootmode usermode
 

@@ -21,7 +21,7 @@
 
 static struct kobject *mymodule; 
 
-static int _init_9(void) 
+static int _init simplefs_init(void) 
 { 
     pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
 
@@ -34,13 +34,13 @@ static int _init_9(void)
     return 0; 
 } 
  
-static void _exit_9(void) 
+static void _exit simplefs_exit(void) 
 { 
     pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
 } 
  
-module_init(_init_9); 
-module_exit(_exit_9); 
+module_init(simplefs_init); 
+module_exit(simplefs_exit); 
 
 MODULE_AUTHOR(AUTHOR);
 MODULE_DESCRIPTION(DESCRIPTION);
