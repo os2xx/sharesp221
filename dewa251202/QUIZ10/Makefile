@@ -1,4 +1,5 @@
-# REV??: 17/05/2022 13:33:00
+# REV??+1: 17/05/2022 14:57:00
+# REV??+0: 17/05/2022 13:33:00
 
 obj-m += hello01.o
 obj-m += hello02.o
@@ -13,6 +14,11 @@ hello02-objs := hello02a.o hello02b.o
 simplefs-objs := hello09.o super.o inode.o file.o dir.o extent.o
 
 PWD := $(CURDIR)
+
+MKFS = mkfs.simplefs
+
+$(MKFS): mkfs.c
+	$(CC) -std=gnu99 -Wall -o $@ $<
 
 all: usermode
 	+make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules

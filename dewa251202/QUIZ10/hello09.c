@@ -79,5 +79,5 @@ module_exit(exit_hello09);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("GSGS & dewa251202");
-MODULE_VERSION("REV04");
+MODULE_VERSION("REV07");
 MODULE_DESCRIPTION("A module for simplefs");
