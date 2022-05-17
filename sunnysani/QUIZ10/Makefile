@@ -8,10 +8,19 @@ obj-m          += hello06.o
 obj-m          += hello07.o
 obj-m          += hello08.o
 obj-m	       += simplefs.o
+simplefs-objs := hello09-fs.o h09-super.o h09-inode.o h09-file.o h09-dir.o h09-extent.o
 ccflags-y      := -std=gnu18
+IMAGE         ?= test.img
+IMAGESIZE     ?= 200
+KDIR          ?= /lib/modules/$(shell uname -r)/build
+MKFS           = mkfs.simplefs
+CC             = gcc
 
 all: usermode
 	+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) modules
+
+$(MKFS): h09-mkfs.c usermode
+        $(CC) -Wall -o $@ $<
 
 H01ins: rootmode
 	insmod  hello01.ko
