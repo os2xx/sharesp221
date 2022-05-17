@@ -8,8 +8,9 @@ obj-m += hello05.o
 obj-m += hello06.o
 obj-m += hello07.o
 obj-m += hello08.o
-obj-m += hello09.o
+obj-m += simplefs.o
 hello02-objs := hello02a.o hello02b.o
+simplefs-objs := hello09.o super.o inode.o file.o dir.o extent.o
 
 PWD := $(CURDIR)
 
@@ -118,12 +119,12 @@ H08del: rootmode
 	rmmod  hello08.ko
 
 H09ins: rootmode
-	insmod  hello09.ko
-	modinfo hello09.ko
-	lsmod   | grep hello09
+	insmod  simplefs.ko
+	modinfo simplefs.ko
+	lsmod   | grep simplefs
 
 H09del: rootmode
-	rmmod  hello09.ko
+	rmmod  simplefs.ko
 
 # === MODE CHECKER === #
 rootmode:

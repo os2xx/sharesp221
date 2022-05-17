@@ -1,13 +1,10 @@
-#include <linux/kernel.h> /* Needed for pr_info() */ 
-#include <linux/module.h> /* Needed by all modules */ 
-#include <linux/version.h>
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
 #include <linux/fs.h>
+#include <linux/kernel.h>
+#include <linux/module.h>
 
 #include "simplefs.h"
-
-#define prefix "ZCZC M09 "
-
-/* === fs.c === */
 
 /* Mount a simplefs partition */
 struct dentry *simplefs_mount(struct file_system_type *fs_type,
@@ -42,7 +39,7 @@ static struct file_system_type simplefs_file_system_type = {
     .next = NULL,
 };
 
-static int __init init_hello09(void) 
+static int __init simplefs_init(void)
 {
     int ret = simplefs_init_inode_cache();
     if (ret) {
@@ -56,28 +53,25 @@ static int __init init_hello09(void)
         goto end;
     }
 
-    pr_info(prefix "hello09 START\n"); 
-
-    /* A non 0 return means init_module failed; module can't be loaded. */ 
+    pr_info("module loaded\n");
 end:
-    return ret; 
-} 
+    return ret;
+}
 
-static void __exit exit_hello09(void) 
-{ 
+static void __exit simplefs_exit(void)
+{
     int ret = unregister_filesystem(&simplefs_file_system_type);
     if (ret)
         pr_err("unregister_filesystem() failed\n");
 
     simplefs_destroy_inode_cache();
 
-    pr_info(prefix "hello09 STOP\n"); 
-} 
+    pr_info("module unloaded\n");
+}
 
-module_init(init_hello09);
-module_exit(exit_hello09);
+module_init(simplefs_init);
+module_exit(simplefs_exit);
 
-MODULE_LICENSE("GPL");
-MODULE_AUTHOR("GSGS & dewa251202");
-MODULE_VERSION("REV04");
-MODULE_DESCRIPTION("A module for simplefs");
+MODULE_LICENSE("Dual BSD/GPL");
+MODULE_AUTHOR("National Cheng Kung University, Taiwan");
+MODULE_DESCRIPTION("a simple file system");
