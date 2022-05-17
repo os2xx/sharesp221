@@ -10,7 +10,7 @@
 #define AUTHOR      "shafiraputri01"
 #define LICENSE     "GPL"
 
-#define pr_fmt(fmt) ZCZCHEADER KBUILD_MODNAME ": " fmt
+#define pr_fmt(fmt) ZCZCHEADER " " KBUILD_MODNAME ": " fmt
 
 #include <linux/kernel.h> /* We are doing kernel work */
 #include <linux/module.h>
@@ -39,27 +39,27 @@ MODULE_PARM_DESC(myintArray, "Array[int]");
 static int h_init(void)
 {
     int i;
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
+    pr_info(%s - %s\n", DESCRIPTION, "START");
 
-    pr_info("%s myshort short integer: %hd\n", ZCZCHEADER, myshort);
-    pr_info("%s myint integer: %d\n", ZCZCHEADER, myint);
-    pr_info("%s mylong long integer: %ld\n", ZCZCHEADER, mylong);
-    pr_info("%s mystring: %s\n", ZCZCHEADER, mystring);
+    pr_info("myshort short integer: %hd\n", myshort);
+    pr_info("myint integer: %d\n", myint);
+    pr_info("mylong long integer: %ld\n", mylong);
+    pr_info("mystring: %s\n",, mystring);
 
     for (i = 0; i < ARRAY_SIZE(myintArray); i++) 
         if (arr_argc != 0)
-            pr_info("%s myintArray[%d]: %d\n", ZCZCHEADER, i, myintArray[i]);
+            pr_info("myintArray[%d]: %d\n", i, myintArray[i]);
         else
-            pr_info("%s myintArray[%d]: %s\n", ZCZCHEADER, i, "-1");
+            pr_info("myintArray[%d]: %s\n", i, "-1");
 
-    pr_info("%s myintArray %d argc\n", ZCZCHEADER, arr_argc);
+    pr_info("myintArray %d argc\n", arr_argc);
  
     return 0;
 }
 
 void h_exit(void)
 {
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
+    pr_info("%s - %s\n", DESCRIPTION, "STOP");
 }
 
 module_init(h_init);
