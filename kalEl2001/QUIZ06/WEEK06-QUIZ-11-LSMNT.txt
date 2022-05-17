@@ -1,0 +1,20 @@
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/loop0          6912    15      6539   1% /mnt/mnt
+/mnt/mnt/:
+total 18
+drwxrwxrwt 4 root      root       1024 May 17 13:26 .
+drwxr-xr-x 4 root      root       4096 May 17 13:22 ..
+drwxr-xr-x 2 kalEl2001 kalEl2001  1024 May 17 13:25 kalEl2001
+drwx------ 2 root      root      12288 May 17 13:21 lost+found
+-rw-r--r-- 1 root      root          0 May 17 13:26 newFile.txt
+
+/mnt/mnt/kalEl2001:
+total 2
+drwxr-xr-x 2 kalEl2001 kalEl2001 1024 May 17 13:25 .
+drwxrwxrwt 4 root      root      1024 May 17 13:26 ..
+-rw-r--r-- 1 kalEl2001 kalEl2001    0 May 17 13:25 kalEl2001.txt
+
+/mnt/mnt/lost+found:
+total 13
+drwx------ 2 root root 12288 May 17 13:21 .
+drwxrwxrwt 4 root root  1024 May 17 13:26 ..
