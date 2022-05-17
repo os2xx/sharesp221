@@ -2,8 +2,12 @@
 #include <linux/module.h> /* Needed by all modules */ 
 #include <linux/fs.h>
 #include <linux/buffer_head.h>
+#include <linux/slab.h>
+#include <linux/statfs.h>
 
 #define prefix "ZCZC M09 "
+
+/* === simplefs.h === */
 
 #ifndef SIMPLEFS_H
 #define SIMPLEFS_H
@@ -141,99 +145,373 @@ extern uint32_t simplefs_ext_search(struct simplefs_file_ei_block *index,
 
 #endif /* SIMPLEFS_H */
 
-/*
- * Iterate over the files contained in dir and commit them in ctx.
- * This function is called by the VFS while ctx->pos changes.
- * Return 0 on success.
- */
-static int simplefs_iterate(struct file *dir, struct dir_context *ctx)
+/* === super.c === */
+
+static struct kmem_cache *simplefs_inode_cache;
+
+int simplefs_init_inode_cache(void)
 {
-    struct inode *inode = file_inode(dir);
+    simplefs_inode_cache = kmem_cache_create(
+        "simplefs_cache", sizeof(struct simplefs_inode_info), 0, 0, NULL);
+    if (!simplefs_inode_cache)
+        return -ENOMEM;
+    return 0;
+}
+
+void simplefs_destroy_inode_cache(void)
+{
+    kmem_cache_destroy(simplefs_inode_cache);
+}
+
+static struct inode *simplefs_alloc_inode(struct super_block *sb)
+{
+    struct simplefs_inode_info *ci =
+        kmem_cache_alloc(simplefs_inode_cache, GFP_KERNEL);
+    if (!ci)
+        return NULL;
+
+    inode_init_once(&ci->vfs_inode);
+    return &ci->vfs_inode;
+}
+
+static void simplefs_destroy_inode(struct inode *inode)
+{
+    struct simplefs_inode_info *ci = SIMPLEFS_INODE(inode);
+    kmem_cache_free(simplefs_inode_cache, ci);
+}
+
+static int simplefs_write_inode(struct inode *inode,
+                                struct writeback_control *wbc)
+{
+    struct simplefs_inode *disk_inode;
     struct simplefs_inode_info *ci = SIMPLEFS_INODE(inode);
     struct super_block *sb = inode->i_sb;
-    struct buffer_head *bh = NULL, *bh2 = NULL;
-    struct simplefs_file_ei_block *eblock = NULL;
-    struct simplefs_dir_block *dblock = NULL;
-    struct simplefs_file *f = NULL;
-    int ei = 0, bi = 0, fi = 0;
-    int ret = 0;
+    struct simplefs_sb_info *sbi = SIMPLEFS_SB(sb);
+    struct buffer_head *bh;
+    uint32_t ino = inode->i_ino;
+    uint32_t inode_block = (ino / SIMPLEFS_INODES_PER_BLOCK) + 1;
+    uint32_t inode_shift = ino % SIMPLEFS_INODES_PER_BLOCK;
 
-    /* Check that dir is a directory */
-    if (!S_ISDIR(inode->i_mode))
-        return -ENOTDIR;
-
-    /*
-     * Check that ctx->pos is not bigger than what we can handle (including
-     * . and ..)
-     */
-    if (ctx->pos > SIMPLEFS_MAX_SUBFILES + 2)
+    if (ino >= sbi->nr_inodes)
         return 0;
 
-    /* Commit . and .. to ctx */
-    if (!dir_emit_dots(dir, ctx))
-        return 0;
-
-    /* Read the directory index block on disk */
-    bh = sb_bread(sb, ci->ei_block);
+    bh = sb_bread(sb, inode_block);
     if (!bh)
         return -EIO;
-    eblock = (struct simplefs_file_ei_block *) bh->b_data;
 
-    ei = (ctx->pos - 2) / SIMPLEFS_FILES_PER_EXT;
-    bi = (ctx->pos - 2) % SIMPLEFS_FILES_PER_EXT
-         / SIMPLEFS_FILES_PER_BLOCK;
-    fi = (ctx->pos - 2) % SIMPLEFS_FILES_PER_BLOCK;
+    disk_inode = (struct simplefs_inode *) bh->b_data;
+    disk_inode += inode_shift;
 
-    /* Iterate over the index block and commit subfiles */
-    for (; ei < SIMPLEFS_MAX_EXTENTS; ei++) {
-        if (eblock->extents[ei].ee_start == 0) {
-            break;
-        }
-        /* Iterate over blocks in one extent */
-        for (; bi < eblock->extents[ei].ee_len; bi++) {
-            bh2 = sb_bread(sb, eblock->extents[ei].ee_start + bi);
-            if (!bh2) {
-                ret = -EIO;
-                goto release_bh;
-            }
-            dblock = (struct simplefs_dir_block *) bh2->b_data;
-            if (dblock->files[0].inode == 0) {
-                break;
-            }
-            /* Iterate every file in one block */
-            for (; fi < SIMPLEFS_FILES_PER_BLOCK; fi++) {
-                f = &dblock->files[fi];
-                if (f->inode && !dir_emit(ctx, f->filename, SIMPLEFS_FILENAME_LEN,
-                               f->inode, DT_UNKNOWN))
-                    break;
-                ctx->pos++;
-            }
-            brelse(bh2);
-            bh2 = NULL;
-        }
+    /* update the mode using what the generic inode has */
+    disk_inode->i_mode = inode->i_mode;
+    disk_inode->i_uid = i_uid_read(inode);
+    disk_inode->i_gid = i_gid_read(inode);
+    disk_inode->i_size = inode->i_size;
+    disk_inode->i_ctime = inode->i_ctime.tv_sec;
+    disk_inode->i_atime = inode->i_atime.tv_sec;
+    disk_inode->i_mtime = inode->i_mtime.tv_sec;
+    disk_inode->i_blocks = inode->i_blocks;
+    disk_inode->i_nlink = inode->i_nlink;
+    disk_inode->ei_block = ci->ei_block;
+    strncpy(disk_inode->i_data, ci->i_data, sizeof(ci->i_data));
+
+    mark_buffer_dirty(bh);
+    sync_dirty_buffer(bh);
+    brelse(bh);
+
+    return 0;
+}
+
+static void simplefs_put_super(struct super_block *sb)
+{
+    struct simplefs_sb_info *sbi = SIMPLEFS_SB(sb);
+    if (sbi) {
+        kfree(sbi->ifree_bitmap);
+        kfree(sbi->bfree_bitmap);
+        kfree(sbi);
+    }
+}
+
+static int simplefs_sync_fs(struct super_block *sb, int wait)
+{
+    struct simplefs_sb_info *sbi = SIMPLEFS_SB(sb);
+    struct simplefs_sb_info *disk_sb;
+    int i;
+
+    /* Flush superblock */
+    struct buffer_head *bh = sb_bread(sb, 0);
+    if (!bh)
+        return -EIO;
+
+    disk_sb = (struct simplefs_sb_info *) bh->b_data;
+
+    disk_sb->nr_blocks = sbi->nr_blocks;
+    disk_sb->nr_inodes = sbi->nr_inodes;
+    disk_sb->nr_istore_blocks = sbi->nr_istore_blocks;
+    disk_sb->nr_ifree_blocks = sbi->nr_ifree_blocks;
+    disk_sb->nr_bfree_blocks = sbi->nr_bfree_blocks;
+    disk_sb->nr_free_inodes = sbi->nr_free_inodes;
+    disk_sb->nr_free_blocks = sbi->nr_free_blocks;
+
+    mark_buffer_dirty(bh);
+    if (wait)
+        sync_dirty_buffer(bh);
+    brelse(bh);
+
+    /* Flush free inodes bitmask */
+    for (i = 0; i < sbi->nr_ifree_blocks; i++) {
+        int idx = sbi->nr_istore_blocks + i + 1;
+
+        bh = sb_bread(sb, idx);
+        if (!bh)
+            return -EIO;
+
+        memcpy(bh->b_data, (void *) sbi->ifree_bitmap + i * SIMPLEFS_BLOCK_SIZE,
+               SIMPLEFS_BLOCK_SIZE);
+
+        mark_buffer_dirty(bh);
+        if (wait)
+            sync_dirty_buffer(bh);
+        brelse(bh);
     }
 
-release_bh:
+    /* Flush free blocks bitmask */
+    for (i = 0; i < sbi->nr_bfree_blocks; i++) {
+        int idx = sbi->nr_istore_blocks + sbi->nr_ifree_blocks + i + 1;
+
+        bh = sb_bread(sb, idx);
+        if (!bh)
+            return -EIO;
+
+        memcpy(bh->b_data, (void *) sbi->bfree_bitmap + i * SIMPLEFS_BLOCK_SIZE,
+               SIMPLEFS_BLOCK_SIZE);
+
+        mark_buffer_dirty(bh);
+        if (wait)
+            sync_dirty_buffer(bh);
+        brelse(bh);
+    }
+
+    return 0;
+}
+
+static int simplefs_statfs(struct dentry *dentry, struct kstatfs *stat)
+{
+    struct super_block *sb = dentry->d_sb;
+    struct simplefs_sb_info *sbi = SIMPLEFS_SB(sb);
+
+    stat->f_type = SIMPLEFS_MAGIC;
+    stat->f_bsize = SIMPLEFS_BLOCK_SIZE;
+    stat->f_blocks = sbi->nr_blocks;
+    stat->f_bfree = sbi->nr_free_blocks;
+    stat->f_bavail = sbi->nr_free_blocks;
+    stat->f_files = sbi->nr_inodes - sbi->nr_free_inodes;
+    stat->f_ffree = sbi->nr_free_inodes;
+    stat->f_namelen = SIMPLEFS_FILENAME_LEN;
+
+    return 0;
+}
+
+static struct super_operations simplefs_super_ops = {
+    .put_super = simplefs_put_super,
+    .alloc_inode = simplefs_alloc_inode,
+    .destroy_inode = simplefs_destroy_inode,
+    .write_inode = simplefs_write_inode,
+    .sync_fs = simplefs_sync_fs,
+    .statfs = simplefs_statfs,
+};
+
+/* Fill the struct superblock from partition superblock */
+int simplefs_fill_super(struct super_block *sb, void *data, int silent)
+{
+    struct buffer_head *bh = NULL;
+    struct simplefs_sb_info *csb = NULL;
+    struct simplefs_sb_info *sbi = NULL;
+    struct inode *root_inode = NULL;
+    int ret = 0, i;
+
+    /* Init sb */
+    sb->s_magic = SIMPLEFS_MAGIC;
+    sb_set_blocksize(sb, SIMPLEFS_BLOCK_SIZE);
+    sb->s_maxbytes = SIMPLEFS_MAX_FILESIZE;
+    sb->s_op = &simplefs_super_ops;
+
+    /* Read sb from disk */
+    bh = sb_bread(sb, SIMPLEFS_SB_BLOCK_NR);
+    if (!bh)
+        return -EIO;
+
+    csb = (struct simplefs_sb_info *) bh->b_data;
+
+    /* Check magic number */
+    if (csb->magic != sb->s_magic) {
+        pr_err("Wrong magic number\n");
+        ret = -EINVAL;
+        goto release;
+    }
+
+    /* Alloc sb_info */
+    sbi = kzalloc(sizeof(struct simplefs_sb_info), GFP_KERNEL);
+    if (!sbi) {
+        ret = -ENOMEM;
+        goto release;
+    }
+
+    sbi->nr_blocks = csb->nr_blocks;
+    sbi->nr_inodes = csb->nr_inodes;
+    sbi->nr_istore_blocks = csb->nr_istore_blocks;
+    sbi->nr_ifree_blocks = csb->nr_ifree_blocks;
+    sbi->nr_bfree_blocks = csb->nr_bfree_blocks;
+    sbi->nr_free_inodes = csb->nr_free_inodes;
+    sbi->nr_free_blocks = csb->nr_free_blocks;
+    sb->s_fs_info = sbi;
+
+    brelse(bh);
+
+    /* Alloc and copy ifree_bitmap */
+    sbi->ifree_bitmap =
+        kzalloc(sbi->nr_ifree_blocks * SIMPLEFS_BLOCK_SIZE, GFP_KERNEL);
+    if (!sbi->ifree_bitmap) {
+        ret = -ENOMEM;
+        goto free_sbi;
+    }
+
+    for (i = 0; i < sbi->nr_ifree_blocks; i++) {
+        int idx = sbi->nr_istore_blocks + i + 1;
+
+        bh = sb_bread(sb, idx);
+        if (!bh) {
+            ret = -EIO;
+            goto free_ifree;
+        }
+
+        memcpy((void *) sbi->ifree_bitmap + i * SIMPLEFS_BLOCK_SIZE, bh->b_data,
+               SIMPLEFS_BLOCK_SIZE);
+
+        brelse(bh);
+    }
+
+    /* Alloc and copy bfree_bitmap */
+    sbi->bfree_bitmap =
+        kzalloc(sbi->nr_bfree_blocks * SIMPLEFS_BLOCK_SIZE, GFP_KERNEL);
+    if (!sbi->bfree_bitmap) {
+        ret = -ENOMEM;
+        goto free_ifree;
+    }
+
+    for (i = 0; i < sbi->nr_bfree_blocks; i++) {
+        int idx = sbi->nr_istore_blocks + sbi->nr_ifree_blocks + i + 1;
+
+        bh = sb_bread(sb, idx);
+        if (!bh) {
+            ret = -EIO;
+            goto free_bfree;
+        }
+
+        memcpy((void *) sbi->bfree_bitmap + i * SIMPLEFS_BLOCK_SIZE, bh->b_data,
+               SIMPLEFS_BLOCK_SIZE);
+
+        brelse(bh);
+    }
+
+    /* Create root inode */
+    root_inode = simplefs_iget(sb, 0);
+    if (IS_ERR(root_inode)) {
+        ret = PTR_ERR(root_inode);
+        goto free_bfree;
+    }
+#if USER_NS_REQUIRED()
+    inode_init_owner(&init_user_ns, root_inode, NULL, root_inode->i_mode);
+#else
+    inode_init_owner(root_inode, NULL, root_inode->i_mode);
+#endif
+
+    sb->s_root = d_make_root(root_inode);
+    if (!sb->s_root) {
+        ret = -ENOMEM;
+        goto iput;
+    }
+
+    return 0;
+
+iput:
+    iput(root_inode);
+free_bfree:
+    kfree(sbi->bfree_bitmap);
+free_ifree:
+    kfree(sbi->ifree_bitmap);
+free_sbi:
+    kfree(sbi);
+release:
     brelse(bh);
 
     return ret;
 }
 
-const struct file_operations simplefs_dir_ops = {
+/* === fs.c === */
+
+/* Mount a simplefs partition */
+struct dentry *simplefs_mount(struct file_system_type *fs_type,
+                              int flags,
+                              const char *dev_name,
+                              void *data)
+{
+    struct dentry *dentry =
+        mount_bdev(fs_type, flags, dev_name, data, simplefs_fill_super);
+    if (IS_ERR(dentry))
+        pr_err("'%s' mount failure\n", dev_name);
+    else
+        pr_info("'%s' mount success\n", dev_name);
+
+    return dentry;
+}
+
+/* Unmount a simplefs partition */
+void simplefs_kill_sb(struct super_block *sb)
+{
+    kill_block_super(sb);
+
+    pr_info("unmounted disk\n");
+}
+
+static struct file_system_type simplefs_file_system_type = {
     .owner = THIS_MODULE,
-    .iterate_shared = simplefs_iterate,
+    .name = "simplefs",
+    .mount = simplefs_mount,
+    .kill_sb = simplefs_kill_sb,
+    .fs_flags = FS_REQUIRES_DEV,
+    .next = NULL,
 };
 
 static int __init init_hello09(void) 
-{ 
+{
+    int ret = simplefs_init_inode_cache();
+    if (ret) {
+        pr_err("inode cache creation failed\n");
+        goto end;
+    }
+
+    ret = register_filesystem(&simplefs_file_system_type);
+    if (ret) {
+        pr_err("register_filesystem() failed\n");
+        goto end;
+    }
+
     pr_info(prefix "hello09 START\n"); 
 
     /* A non 0 return means init_module failed; module can't be loaded. */ 
-    return 0; 
+end:
+    return ret; 
 } 
 
 static void __exit exit_hello09(void) 
 { 
+    int ret = unregister_filesystem(&simplefs_file_system_type);
+    if (ret)
+        pr_err("unregister_filesystem() failed\n");
+
+    simplefs_destroy_inode_cache();
+
     pr_info(prefix "hello09 STOP\n"); 
 } 
 
