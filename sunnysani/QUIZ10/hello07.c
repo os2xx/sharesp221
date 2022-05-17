@@ -101,7 +101,7 @@ static int __init hello07_init(void)
 {
     struct proc_dir_entry *entry;
 
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START"); 
+    pr_info("%s %s%s\n", ZCZCHEADER, DESCRIPTION, ": /proc/ file with seq_file - START"); 
 
     pr_info("%s unsigned long integer (COUNTER): %lu\n", ZCZCHEADER, counter); 
 
@@ -121,7 +121,7 @@ static void __exit hello07_exit(void)
     remove_proc_entry(PROC_NAME, NULL);
     pr_debug("%s /proc/%s removed\n", ZCZCHEADER, PROC_NAME);
     pr_info("%s /proc/%s removed\n", ZCZCHEADER, PROC_NAME);
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP"); 
+    pr_info("%s %s%s\n", ZCZCHEADER, DESCRIPTION, ": /proc/ file with seq_file - STOP"); 
 }
 
 module_init(hello07_init);

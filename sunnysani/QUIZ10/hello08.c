@@ -38,7 +38,7 @@ static int __init H08module_init(void)
 {
     int error = 0;
 
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START"); 
+    pr_info("%s %s%s\n", ZCZCHEADER, DESCRIPTION, ": /sys/ the sysfs - START"); 
 
     // pr_info("H08module: initialised\n");
 
@@ -59,7 +59,7 @@ static int __init H08module_init(void)
 
 static void __exit H08module_exit(void)
 {
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
+    pr_info("%s %s%s\n", ZCZCHEADER, DESCRIPTION, ": /sys/ the sysfs - STOP");
     kobject_put(H08module);
 }
 
