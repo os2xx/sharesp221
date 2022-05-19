@@ -1,4 +1,5 @@
-#define pr_fmt(fmt) "simplefs: " fmt
+#define ZCZCHEADER  "ZCZC M09"
+#define pr_fmt(fmt) ZCZCHEADER " " KBUILD_MODNAME ": " fmt
 
 #include <linux/buffer_head.h>
 #include <linux/fs.h>
@@ -73,6 +74,7 @@ static int simplefs_file_get_block(struct inode *inode,
 
 brelse_index:
     brelse(bh_index);
+    pr_info("get_block");
 
     return ret;
 }

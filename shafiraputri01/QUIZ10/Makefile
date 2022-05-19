@@ -7,8 +7,8 @@ obj-m += hello05.o
 obj-m += hello06.o
 obj-m += hello07.o
 obj-m += hello08.o
-obj-m += hello09.o
-hello09-objs := fs.o super.o inode.o file.o dir.o extent.o
+obj-m += simplefs.o
+simplefs-objs := fs.o super.o inode.o file.o dir.o extent.o
 ccflags-y      := -std=gnu18
  
 PWD := $(CURDIR)
@@ -17,11 +17,25 @@ KDIR ?= /lib/modules/$(shell uname -r)/build
 
 MKFS = mkfs.simplefs
  
-all:usermode
-	+make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules 
+all:usermode $(MKFS)
+	+make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+
+IMAGE ?= test.img
+IMAGESIZE ?= 200
+# To test max files(40920) in directory, the image size should be at least 159.85 MiB
+# 40920 * 4096(block size) ~= 159.85 MiB
+
+$(MKFS): mkfs.c
+	$(CC) -std=gnu99 -Wall -o $@ $<
+
+$(IMAGE): $(MKFS)
+	dd if=/dev/zero of=${IMAGE} bs=1M count=${IMAGESIZE}
+	./$< $(IMAGE)
 
 clean:usermode
 	+make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	rm -f *~ $(PWD)/*.ur-safe
+	rm -f $(MKFS) $(IMAGE)
 
 help: usermode
 	@echo "all"
@@ -46,13 +60,13 @@ H02del:rootmode
 
 H03ins:rootmode
 	insmod  hello03.ko
+	modinfo hello03.ko
 	lsmod   | grep hello03
 	rmmod   hello03
 	insmod  hello03.ko myshort=69 myint=888 mylong=1234567890  mystring="newString" myintArray=1,2,3,4,5
 	lsmod   | grep hello03
 	rmmod   hello03
 	insmod  hello03.ko myshort=99 myint=999 mylong=1122334455  mystring="lastString" myintArray=11,22,33,44,55
-	modinfo hello03.ko
 	lsmod   | grep hello03
 H03del:rootmode
 	rmmod   hello03
@@ -126,7 +140,7 @@ H09ins:rootmode
 	lsmod   | grep simplefs
 	bash ./h09-test.sh
 H09del:rootmode
-	rmmod   hello09
+	rmmod   simplefs
 
 
 rootmode:

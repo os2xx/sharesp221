@@ -1,19 +1,21 @@
-#define VERSION     "START"
+#define VERSION     "REV01"
+// REV01: Thu 19 May 2022 16:50:00 WIB
 // START: Tue 17 May 2022 14:50:00 WIB
 // (c) 2022-2022 It is a FREE GSGS one.
 #define ZCZCHEADER  "ZCZC M09"
 #define DESCRIPTION "A simple file system"
-#define AUTHOR      "National Cheng Kung University, Taiwan, editted by shafiraputri01"
+#define AUTHOR      "National Cheng Kung University, Taiwan, modified by shafiraputri01"
 #define LICENSE     "Dual BSD/GPL"
 
 #define pr_fmt(fmt) ZCZCHEADER " " KBUILD_MODNAME ": " fmt
-
 
 #include <linux/fs.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
 
 #include "simplefs.h"
+
+int ret;
 
 /* Mount a simplefs partition */
 struct dentry *simplefs_mount(struct file_system_type *fs_type,
@@ -51,7 +53,7 @@ static struct file_system_type simplefs_file_system_type = {
 static int __init simplefs_init(void)
 {
     pr_info("%s - %s\n", DESCRIPTION, "START");
-    int ret = simplefs_init_inode_cache();
+    ret = simplefs_init_inode_cache();
     if (ret) {
         pr_err("inode cache creation failed\n");
         goto end;
@@ -63,14 +65,14 @@ static int __init simplefs_init(void)
         goto end;
     }
 
-    pr_info("%s\n", ZCZCHEADER, "Module loaded");
+    pr_info("%s\n", "Module loaded");
 end:
     return ret;
 }
 
 static void __exit simplefs_exit(void)
 {
-    int ret = unregister_filesystem(&simplefs_file_system_type);
+    ret = unregister_filesystem(&simplefs_file_system_type);
     if (ret)
         pr_err("unregister_filesystem() failed\n");
 
