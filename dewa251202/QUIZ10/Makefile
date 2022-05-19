@@ -1,3 +1,4 @@
+# REV??+2: 19/05/2022 12:34:00
 # REV??+1: 17/05/2022 14:57:00
 # REV??+0: 17/05/2022 13:33:00
 
@@ -17,14 +18,14 @@ PWD := $(CURDIR)
 
 MKFS = mkfs.simplefs
 
-$(MKFS): mkfs.c
-	$(CC) -std=gnu99 -Wall -o $@ $<
-
 all: usermode
 	+make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
 clean: 
 	+make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+
+$(MKFS): mkfs.c
+	$(CC) -std=gnu99 -Wall -o $@ $<
 
 H01ins: rootmode
 	insmod  hello01.ko
