@@ -1,3 +1,4 @@
+# REV??+3: 19/05/2022 12:39:00
 # REV??+2: 19/05/2022 12:34:00
 # REV??+1: 17/05/2022 14:57:00
 # REV??+0: 17/05/2022 13:33:00
@@ -129,6 +130,7 @@ H09ins: rootmode
 	insmod  simplefs.ko
 	modinfo simplefs.ko
 	lsmod   | grep simplefs
+	bash ./h09-test.sh
 
 H09del: rootmode
 	rmmod  simplefs.ko
