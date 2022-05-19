@@ -1,16 +1,17 @@
 /*
  * hello07.c
  */
-#define VERSION     "REV01"
+#define VERSION     "REV02"
+// REV02: Thu 19 May 2022 16:50:00 WIB
 // REV01: Tue 17 May 2022 14:50:00 WIB
 // START: Tue 10 May 2022 14:50:00 WIB
 // (c) 2022-2022 It is a FREE GSGS one.
 #define ZCZCHEADER  "ZCZC M07"
-#define DESCRIPTION "A module with init_module()/clean_module()"
+#define DESCRIPTION "/proc/ file with seq_file"
 #define AUTHOR      "shafiraputri01"
 #define LICENSE     "GPL"
 
-#define pr_fmt(fmt) ZCZCHEADER KBUILD_MODNAME ": " fmt
+#define pr_fmt(fmt) ZCZCHEADER " " KBUILD_MODNAME ": " fmt
 
 #include <linux/init.h> 
 #include <linux/kernel.h> 
@@ -58,7 +59,7 @@ static void my_seq_stop(struct seq_file *s, void *v)
 static int my_seq_show(struct seq_file *s, void *v) 
 { 
     loff_t *spos = (loff_t *)v; 
-    pr_info("%s %s %s=%Ld\n", ZCZCHEADER, PROC_NAME, "COUNTER", *spos);
+    pr_info("%s %s=%Ld\n", PROC_NAME, "COUNTER", *spos);
     seq_printf(s, "%Ld\n", *spos); 
     return 0; 
 } 
@@ -95,16 +96,16 @@ static int __init hello07_init(void)
 { 
     struct proc_dir_entry *entry;
     
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
+    pr_info("%s - %s\n", DESCRIPTION, "START");
 
     entry = proc_create(PROC_NAME, 0, NULL, &my_file_ops);
-    pr_info("%s /proc/%s %s\n", ZCZCHEADER, PROC_NAME, "created");
+    pr_info("/proc/%s created\n", PROC_NAME);
     if (entry == NULL) {
         remove_proc_entry(PROC_NAME, NULL);
         pr_debug("Error: Could not initialize /proc/%s\n", PROC_NAME);
         return -ENOMEM;
     }
-    pr_info("%s unsigned long integer (COUNTER): %ld\n", ZCZCHEADER, counter);
+    pr_info("unsigned long integer (COUNTER): %ld\n", counter);
 
     return 0; 
 } 
@@ -112,8 +113,8 @@ static int __init hello07_init(void)
 static void __exit hello07_exit(void) 
 { 
     remove_proc_entry(PROC_NAME, NULL);
-    pr_info("%s /proc/%s %s\n", ZCZCHEADER, PROC_NAME, "removed");
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
+    pr_info("/proc/%s removed\n", PROC_NAME);
+    pr_info("%s - %s\n", DESCRIPTION, "STOP");
 } 
  
 module_init(hello07_init); 

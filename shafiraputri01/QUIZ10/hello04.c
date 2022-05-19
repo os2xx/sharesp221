@@ -1,17 +1,19 @@
 /*
  * hello04.c
  */
-#define VERSION     "REV02"
+#define VERSION     "REV03"
+// REV03: Thu 19 May 2022 16:50:00 WIB
 // REV02: Tue 17 May 2022 14:50:00 WIB
 // REV01: Tue 10 May 2022 14:50:00 WIB
 // (c) 2022-2022 It is a FREE GSGS one.
 #define ZCZCHEADER  "ZCZC M04"
-#define DESCRIPTION "A module with init_module()/clean_module()"
+#define DESCRIPTION "The /proc File System"
 #define AUTHOR      "shafiraputri01"
 #define LICENSE     "GPL"
 #define procfs_name "helloworld"
+#define procfs_dir "/proc/" procfs_name
 
-#define pr_fmt(fmt) ZCZCHEADER KBUILD_MODNAME ": " fmt
+#define pr_fmt(fmt) ZCZCHEADER " " KBUILD_MODNAME ": " fmt
 
 #include <linux/kernel.h> 
 #include <linux/module.h> 
@@ -28,15 +30,15 @@ static struct proc_dir_entry *our_proc_file;
 static ssize_t procfile_read(struct file *filePointer, char __user *buffer, 
                              size_t buffer_length, loff_t *offset) 
 { 
-    char s[13] = "HelloWorld!\n"; 
+    char s[13] = "Hello World!\n"; 
     int len = sizeof(s); 
     ssize_t ret = len; 
  
     if (*offset >= len || copy_to_user(buffer, s, len)) { 
-        pr_info("copy_to_user failed\n"); 
+        pr_info("%s copy_to_user failed\n", procfs_dir); 
         ret = 0; 
     } else { 
-        pr_info("procfile read %s\n", filePointer->f_path.dentry->d_name.name); 
+        pr_info("%s read\n", procfs_dir); 
         *offset += len; 
     } 
  
@@ -55,7 +57,7 @@ static const struct file_operations proc_file_fops = {
  
 static int __init procfs1_init(void) 
 { 
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
+    pr_info("%s - %s\n", DESCRIPTION, "START");
     our_proc_file = proc_create(procfs_name, 0644, NULL, &proc_file_fops); 
     if (NULL == our_proc_file) { 
         proc_remove(our_proc_file); 
@@ -63,15 +65,15 @@ static int __init procfs1_init(void)
         return -ENOMEM; 
     } 
  
-    pr_info("%s /proc/%s created\n", ZCZCHEADER, procfs_name); 
+    pr_info("%s created\n", procfs_dir); 
     return 0; 
 } 
  
 static void __exit procfs1_exit(void) 
 { 
     proc_remove(our_proc_file); 
-    pr_info("%s /proc/%s removed\n", ZCZCHEADER, procfs_name); 
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
+    pr_info("%s removed\n", procfs_dir); 
+    pr_info("%s - %s\n", DESCRIPTION, "STOP");
 } 
  
 module_init(procfs1_init); 

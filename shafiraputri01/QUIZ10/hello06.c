@@ -1,18 +1,20 @@
 /*
  * hello06.c
  */
-#define VERSION     "REV02"
+#define VERSION     "REV03"
+// REV03: Thu 19 May 2022 16:50:00 WIB
 // REV02: Tue 17 May 2022 14:50:00 WIB
 // REV01: Tue 10 May 2022 14:50:00 WIB
 // (c) 2022-2022 It is a FREE GSGS one.
 #define ZCZCHEADER  "ZCZC M06"
-#define DESCRIPTION "A module with init_module()/clean_module()"
+#define DESCRIPTION "Read from and write to /proc"
 #define AUTHOR      "shafiraputri01"
 #define LICENSE     "GPL" 
 #define PROCFS_MAX_SIZE 1024 
 #define PROCFS_NAME "buffer1k"
+#define PROCFS_DIR "/proc/" PROCFS_NAME
 
-#define pr_fmt(fmt) ZCZCHEADER KBUILD_MODNAME ": " fmt
+#define pr_fmt(fmt) ZCZCHEADER " " KBUILD_MODNAME ": " fmt
 
 #include <linux/kernel.h> 
 #include <linux/module.h> 
@@ -37,15 +39,15 @@ static unsigned long procfs_buffer_size = 0;
 static ssize_t procfile_read(struct file *filePointer, char __user *buffer, 
                              size_t buffer_length, loff_t *offset) 
 { 
-    char s[13] = "HelloWorld!\n"; 
+    char s[13] = "Hello World!\n"; 
     int len = sizeof(s); 
     ssize_t ret = len; 
  
     if (*offset >= len || copy_to_user(buffer, s, len)) { 
-        pr_info("%s copy_to_user failed\n", ZCZCHEADER); 
+        pr_info("%s copy_to_user failed\n", PROCFS_DIR); 
         ret = 0; 
     } else { 
-        pr_info("%s procfile read %s\n", ZCZCHEADER, filePointer->f_path.dentry->d_name.name); 
+        pr_info("%s read\n", PROCFS_DIR); 
         *offset += len; 
     } 
  
@@ -64,7 +66,7 @@ static ssize_t procfile_write(struct file *file, const char __user *buff,
         return -EFAULT; 
  
     procfs_buffer[procfs_buffer_size & (PROCFS_MAX_SIZE - 1)] = '\0'; 
-    pr_info("%s procfile write %s\n", ZCZCHEADER, procfs_buffer); 
+    pr_info("%s write\n", PROCFS_DIR); 
  
     return procfs_buffer_size; 
 } 
@@ -83,7 +85,7 @@ static const struct file_operations proc_file_fops = {
  
 static int __init procfs2_init(void) 
 { 
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "START");
+    pr_info("%s - %s\n", DESCRIPTION, "START");
     our_proc_file = proc_create(PROCFS_NAME, 0644, NULL, &proc_file_fops); 
     if (NULL == our_proc_file) { 
         proc_remove(our_proc_file); 
@@ -91,15 +93,15 @@ static int __init procfs2_init(void)
         return -ENOMEM; 
     } 
  
-    pr_info("%s /proc/%s created\n", ZCZCHEADER, PROCFS_NAME); 
+    pr_info("%s created\n", PROCFS_DIR); 
     return 0; 
 } 
  
 static void __exit procfs2_exit(void) 
 { 
     proc_remove(our_proc_file); 
-    pr_info("%s /proc/%s removed\n", ZCZCHEADER, PROCFS_NAME); 
-    pr_info("%s %s %s\n", ZCZCHEADER, DESCRIPTION, "STOP");
+    pr_info("%s removed\n", PROCFS_DIR); 
+    pr_info("%s - %s\n", DESCRIPTION, "STOP");
 } 
  
 module_init(procfs2_init); 
