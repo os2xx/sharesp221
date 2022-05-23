@@ -36,11 +36,10 @@ static int simplefs_file_get_block(struct inode *inode,
     bh_index = sb_bread(sb, ci->ei_block);
     if (!bh_index)
         return -EIO;
-    index = (struct simplefs_file_ei_block *)bh_index->b_data;
+    index = (struct simplefs_file_ei_block *) bh_index->b_data;
 
     extent = simplefs_ext_search(index, iblock);
-    if (extent == -1)
-    {
+    if (extent == -1) {
         ret = -EFBIG;
         goto brelse_index;
     }
@@ -49,13 +48,11 @@ static int simplefs_file_get_block(struct inode *inode,
      * Check if iblock is already allocated. If not and create is true,
      * allocate it. Else, get the physical block number.
      */
-    if (index->extents[extent].ee_start == 0)
-    {
+    if (index->extents[extent].ee_start == 0) {
         if (!create)
             return 0;
         bno = get_free_blocks(sbi, 8);
-        if (!bno)
-        {
+        if (!bno) {
             ret = -ENOSPC;
             goto brelse_index;
         }
@@ -66,9 +63,7 @@ static int simplefs_file_get_block(struct inode *inode,
                          index->extents[extent - 1].ee_len
                    : 0;
         alloc = true;
-    }
-    else
-    {
+    } else {
         bno = index->extents[extent].ee_start + iblock -
               index->extents[extent].ee_block;
     }
@@ -157,8 +152,7 @@ static int simplefs_write_end(struct file *file,
 
     /* Complete the write() */
     int ret = generic_write_end(file, mapping, pos, len, copied, page, fsdata);
-    if (ret < len)
-    {
+    if (ret < len) {
         pr_err("wrote less than requested.");
         return ret;
     }
@@ -171,8 +165,7 @@ static int simplefs_write_end(struct file *file,
     mark_inode_dirty(inode);
 
     /* If file is smaller than before, free unused blocks */
-    if (nr_blocks_old > inode->i_blocks)
-    {
+    if (nr_blocks_old > inode->i_blocks) {
         int i;
         struct buffer_head *bh_index;
         struct simplefs_file_ei_block *index;
@@ -183,22 +176,20 @@ static int simplefs_write_end(struct file *file,
 
         /* Read ei_block to remove unused blocks */
         bh_index = sb_bread(sb, ci->ei_block);
-        if (!bh_index)
-        {
+        if (!bh_index) {
             pr_err("failed truncating '%s'. we just lost %llu blocks\n",
                    file->f_path.dentry->d_name.name,
                    nr_blocks_old - inode->i_blocks);
             goto end;
         }
-        index = (struct simplefs_file_ei_block *)bh_index->b_data;
+        index = (struct simplefs_file_ei_block *) bh_index->b_data;
 
         first_ext = simplefs_ext_search(index, inode->i_blocks - 1);
         /* Reserve unused block in last extent */
         if (inode->i_blocks - 1 != index->extents[first_ext].ee_block)
             first_ext++;
 
-        for (i = first_ext; i < SIMPLEFS_MAX_EXTENTS; i++)
-        {
+        for (i = first_ext; i < SIMPLEFS_MAX_EXTENTS; i++) {
             if (!index->extents[i].ee_start)
                 break;
             put_blocks(SIMPLEFS_SB(sb), index->extents[i].ee_start,

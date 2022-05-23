@@ -38,7 +38,7 @@ static int __init hello03_init(void)
     pr_info("%s myint integer: %d\n", ZCZCHEADER, myint); 
     pr_info("%s mylong long integer: %ld\n", ZCZCHEADER, mylong); 
     pr_info("%s mystring: %s\n", ZCZCHEADER, mystring); 
-    for (i = 0; i<(sizeof myintArray / sizeof (int)); i++) 
+    for (i = 0; i<(sizeof myintarray / sizeof (int)); i++) 
         pr_info("%s myintArray[%d] = %d\n", ZCZCHEADER, i, myintarray[i]); 
     pr_info("%s myintArray %d argc", ZCZCHEADER, arr_argc);
     return 0; 

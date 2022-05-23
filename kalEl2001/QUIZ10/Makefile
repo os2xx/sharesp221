@@ -8,7 +8,7 @@ obj-m          += hello06.o
 obj-m          += hello07.o
 obj-m          += hello08.o
 obj-m          += simplefs.o
-simplefs-objs  := hello09-fs.o h09-super.o h09-inode.o h09-file.o h09-dir.o h09-extent.o
+simplefs-objs  := hello09.o super.o inode.o file.o dir.o extent.o
 ccflags-y      := -std=gnu18
 IMAGE          ?= test.img
 IMAGESIZE      ?= 200
@@ -122,7 +122,7 @@ H09ins: rootmode
 H09del: rootmode
 	rmmod	simplefs
 
-$(MKFS): h09-mkfs.c usermode
+$(MKFS): mkfs.c usermode
 	$(CC) -Wall -o $@ $<
 
 .PHONY: clean help rootmode usermode

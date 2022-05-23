@@ -16,13 +16,11 @@ static inline uint32_t get_first_free_bits(unsigned long *freemap,
                                            uint32_t len)
 {
     uint32_t bit, prev = 0, count = 0;
-    for_each_set_bit(bit, freemap, size)
-    {
+    for_each_set_bit (bit, freemap, size) {
         if (prev != bit - 1)
             count = 0;
         prev = bit;
-        if (++count == len)
-        {
+        if (++count == len) {
             bitmap_clear(freemap, bit - len + 1, len);
             return bit - len + 1;
         }
@@ -54,6 +52,7 @@ static inline uint32_t get_free_blocks(struct simplefs_sb_info *sbi,
         sbi->nr_free_blocks -= len;
     return ret;
 }
+
 
 /* Mark the `len` bit(s) from i-th bit in freemap as free (i.e. 1) */
 static inline int put_free_bits(unsigned long *freemap,

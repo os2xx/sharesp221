@@ -43,39 +43,34 @@ static int simplefs_iterate(struct file *dir, struct dir_context *ctx)
     bh = sb_bread(sb, ci->ei_block);
     if (!bh)
         return -EIO;
-    eblock = (struct simplefs_file_ei_block *)bh->b_data;
+    eblock = (struct simplefs_file_ei_block *) bh->b_data;
 
     ei = (ctx->pos - 2) / SIMPLEFS_FILES_PER_EXT;
-    bi = (ctx->pos - 2) % SIMPLEFS_FILES_PER_EXT / SIMPLEFS_FILES_PER_BLOCK;
+    bi = (ctx->pos - 2) % SIMPLEFS_FILES_PER_EXT
+         / SIMPLEFS_FILES_PER_BLOCK;
     fi = (ctx->pos - 2) % SIMPLEFS_FILES_PER_BLOCK;
 
     /* Iterate over the index block and commit subfiles */
-    for (; ei < SIMPLEFS_MAX_EXTENTS; ei++)
-    {
-        if (eblock->extents[ei].ee_start == 0)
-        {
+    for (; ei < SIMPLEFS_MAX_EXTENTS; ei++) {
+        if (eblock->extents[ei].ee_start == 0) {
             break;
         }
         /* Iterate over blocks in one extent */
-        for (; bi < eblock->extents[ei].ee_len; bi++)
-        {
+        for (; bi < eblock->extents[ei].ee_len; bi++) {
             bh2 = sb_bread(sb, eblock->extents[ei].ee_start + bi);
-            if (!bh2)
-            {
+            if (!bh2) {
                 ret = -EIO;
                 goto release_bh;
             }
-            dblock = (struct simplefs_dir_block *)bh2->b_data;
-            if (dblock->files[0].inode == 0)
-            {
+            dblock = (struct simplefs_dir_block *) bh2->b_data;
+            if (dblock->files[0].inode == 0) {
                 break;
             }
             /* Iterate every file in one block */
-            for (; fi < SIMPLEFS_FILES_PER_BLOCK; fi++)
-            {
+            for (; fi < SIMPLEFS_FILES_PER_BLOCK; fi++) {
                 f = &dblock->files[fi];
                 if (f->inode && !dir_emit(ctx, f->filename, SIMPLEFS_FILENAME_LEN,
-                                          f->inode, DT_UNKNOWN))
+                               f->inode, DT_UNKNOWN))
                     break;
                 ctx->pos++;
             }

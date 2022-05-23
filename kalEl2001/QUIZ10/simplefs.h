@@ -10,22 +10,23 @@
 #define SIMPLEFS_MAX_EXTENTS \
     ((SIMPLEFS_BLOCK_SIZE - sizeof(uint32_t)) / sizeof(struct simplefs_extent))
 #define SIMPLEFS_MAX_BLOCKS_PER_EXTENT 8 /* It can be ~(uint32) 0 */
-#define SIMPLEFS_MAX_FILESIZE \
-    ((uint64_t)SIMPLEFS_MAX_BLOCKS_PER_EXTENT * SIMPLEFS_BLOCK_SIZE * SIMPLEFS_MAX_EXTENTS)
+#define SIMPLEFS_MAX_FILESIZE                                      \
+    ((uint64_t) SIMPLEFS_MAX_BLOCKS_PER_EXTENT *SIMPLEFS_BLOCK_SIZE \
+        *SIMPLEFS_MAX_EXTENTS)
 
 #define SIMPLEFS_FILENAME_LEN 255
 
 #define SIMPLEFS_FILES_PER_BLOCK \
     (SIMPLEFS_BLOCK_SIZE / sizeof(struct simplefs_file))
 #define SIMPLEFS_FILES_PER_EXT \
-    (SIMPLEFS_FILES_PER_BLOCK * SIMPLEFS_MAX_BLOCKS_PER_EXTENT)
+    (SIMPLEFS_FILES_PER_BLOCK *SIMPLEFS_MAX_BLOCKS_PER_EXTENT)
 
 #define SIMPLEFS_MAX_SUBFILES \
-    (SIMPLEFS_FILES_PER_EXT * SIMPLEFS_MAX_EXTENTS)
+    (SIMPLEFS_FILES_PER_EXT *SIMPLEFS_MAX_EXTENTS)
 
 #include <linux/version.h>
 
-#define USER_NS_REQUIRED() LINUX_VERSION_CODE >= KERNEL_VERSION(5, 12, 0)
+#define USER_NS_REQUIRED() LINUX_VERSION_CODE >= KERNEL_VERSION(5,12,0)
 
 /*
  * simplefs partition layout
@@ -43,8 +44,7 @@
  * +---------------+
  */
 
-struct simplefs_inode
-{
+struct simplefs_inode {
     uint32_t i_mode;   /* File mode */
     uint32_t i_uid;    /* Owner id */
     uint32_t i_gid;    /* Group id */
@@ -54,15 +54,14 @@ struct simplefs_inode
     uint32_t i_mtime;  /* Modification time */
     uint32_t i_blocks; /* Block count */
     uint32_t i_nlink;  /* Hard links count */
-    uint32_t ei_block; /* Block with list of extents for this file */
-    char i_data[32];   /* store symlink content */
+    uint32_t ei_block;  /* Block with list of extents for this file */
+    char i_data[32]; /* store symlink content */
 };
 
 #define SIMPLEFS_INODES_PER_BLOCK \
     (SIMPLEFS_BLOCK_SIZE / sizeof(struct simplefs_inode))
 
-struct simplefs_sb_info
-{
+struct simplefs_sb_info {
     uint32_t magic; /* Magic number */
 
     uint32_t nr_blocks; /* Total number of blocks (incl sb & inodes) */
@@ -83,34 +82,29 @@ struct simplefs_sb_info
 
 #ifdef __KERNEL__
 
-struct simplefs_inode_info
-{
-    uint32_t ei_block; /* Block with list of extents for this file */
+struct simplefs_inode_info {
+    uint32_t ei_block;  /* Block with list of extents for this file */
     char i_data[32];
     struct inode vfs_inode;
 };
 
-struct simplefs_extent
-{
+struct simplefs_extent {
     uint32_t ee_block; /* first logical block extent covers */
     uint32_t ee_len;   /* number of blocks covered by extent */
     uint32_t ee_start; /* first physical block extent covers */
 };
 
-struct simplefs_file_ei_block
-{
+struct simplefs_file_ei_block {
     uint32_t nr_files; /* Number of files in directory */
     struct simplefs_extent extents[SIMPLEFS_MAX_EXTENTS];
 };
 
-struct simplefs_file
-{
+struct simplefs_file {
     uint32_t inode;
     char filename[SIMPLEFS_FILENAME_LEN];
 };
 
-struct simplefs_dir_block
-{
+struct simplefs_dir_block {
     struct simplefs_file files[SIMPLEFS_FILES_PER_BLOCK];
 };
 
